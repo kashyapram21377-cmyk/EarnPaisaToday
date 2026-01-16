@@ -1,1 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>EarnPaisaToday</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+body{font-family:Arial;text-align:center;background:#f5f5f5;padding:15px}
+h1{color:#ff9800}
+.btn{display:block;background:#2196f3;color:#fff;
+     padding:15px;margin:10px 0;border-radius:8px;
+     text-decoration:none;font-size:18px}
+.lock{font-size:12px;color:red}
+</style>
+</head>
+<body>
 
+<h1>💸 EarnPaisaToday</h1>
+<p>International + Indian Real Earning Platform</p>
+
+<a class="btn" href="offers.html">🔥 Offers (Worldwide)</a>
+<a class="btn" href="games.html">🎮 Play & Earn</a>
+<a class="btn" href="withdraw.html">💳 Withdraw</a>
+
+<button class="btn" onclick="shareApp()">📤 Share & Earn</button>
+
+<p class="lock">🔒 Secure system | Fake earning blocked</p>
+
+<script>
+function shareApp(){
+  let msg =
+"💸 Earn real money online!\n\n"+
+"🌍 International + Indian Offers\n"+
+"🎮 Games | 💳 Withdraw\n\n"+
+"👉 Join now:\nhttps://kashyapram21377-cmyk.github.io/EarnPaisaToday/";
+  if(navigator.share){
+    navigator.share({text:msg});
+  } else {
+    window.open("https://wa.me/?text="+encodeURIComponent(msg));
+  }
+}
+</script>
+
+</body>
+</html>
