@@ -1,13 +1,81 @@
 <!DOCTYPE html>
 <html>
+<head>
+<title>Withdraw - EarnPaisaToday</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+
+<script>
+const firebaseConfig = {
+  apiKey: "AIzaSyBwd7y4uG955kZ5eg91ryn8bzbWzK2R_Ks",
+  authDomain: "earnpaisatoday.firebaseapp.com",
+  projectId: "earnpaisatoday",
+};
+firebase.initializeApp(firebaseConfig);
+
+const auth = firebase.auth();
+const db = firebase.firestore();
+</script>
+
+<style>
+body{font-family:Arial;background:#f4f6fa;padding:15px}
+.card{background:#fff;padding:15px;border-radius:10px;max-width:400px;margin:auto}
+input,select,button{
+  width:100%;padding:10px;margin-top:10px;
+  font-size:15px
+}
+button{background:#4caf50;color:#fff;border:none;border-radius:6px}
+</style>
+</head>
+
 <body>
-<h2>💰 Withdraw</h2>
-<p>Minimum Withdraw ₹300</p>
 
-<input placeholder="UPI ID"><br><br>
-<button>Submit Request</button>
+<div class="card">
+<h2>💳 Withdraw Request</h2>
 
-<br><br>
-<a href="index.html">⬅ Back</a>
+<input id="name" placeholder="Your Name">
+<input id="amount" type="number" placeholder="Amount (Min ₹300)">
+<select id="method">
+  <option>UPI</option>
+  <option>Paytm</option>
+  <option>Bank</option>
+</select>
+<input id="account" placeholder="UPI ID / Bank Details">
+
+<button onclick="withdraw()">Submit Request</button>
+
+<p id="msg"></p>
+</div>
+
+<script>
+auth.signInAnonymously();
+
+function withdraw(){
+  const user = auth.currentUser;
+  const amount = Number(document.getElementById("amount").value);
+
+  if(amount < 300){
+    alert("Minimum withdraw ₹300");
+    return;
+  }
+
+  db.collection("withdraw_requests").add({
+    userId: user.uid,
+    name: document.getElementById("name").value,
+    amount: amount,
+    method: document.getElementById("method").value,
+    account: document.getElementById("account").value,
+    status: "pending",
+    time: firebase.firestore.FieldValue.serverTimestamp()
+  }).then(()=>{
+    document.getElementById("msg").innerHTML =
+      "✅ Request submitted. Admin will review.";
+  });
+}
+</script>
+
 </body>
 </html>
