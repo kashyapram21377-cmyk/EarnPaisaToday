@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Admin Panel - EarnPaisaToday</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+
+<script>
+const firebaseConfig = {
+  apiKey: "AIzaSyBwd7y4uG955kZ5eg91ryn8bzbWzK2R_Ks",
+  authDomain: "earnpaisatoday.firebaseapp.com",
+  projectId: "earnpaisatoday",
+};
+firebase.initializeApp(firebaseConfig);
+
+const auth = firebase.auth();
+const db = firebase.firestore();
+</script>
+
+<style>
+body{font-family:Arial;background:#f4f6fa;padding:10px}
+.card{background:#fff;padding:10px;border-radius:8px;margin-bottom:10px}
+button{padding:6px 10px;margin:5px;border:none;border-radius:5px}
+.approve{background:green;color:white}
+.reject{background:red;color:white}
+</style>
+</head>
+
+<body>
+
+<h2>🔐 Admin Panel</h2>
+<div id="list">Loading...</div>
+
+<script>
+auth.signInWithEmailAndPassword(
+  "kashyapram21377@gmail.com",
+  "YOUR_PASSWORD"
+);
+
+auth.onAuthStateChanged(user=>{
+  if(!user) return;
+
+  db.collection("admins").doc(user.uid).get().then(doc=>{
+    if(!doc.exists){
+      document.body.innerHTML="❌ Access Denied";
+      return;
+    }
+
+    db.collection("withdraw_requests")
+      .orderBy("time","desc")
+      .onSnapshot(snap=>{
+        let html="";
+        snap.forEach(d=>{
+          let x=d.data();
+          html+=`
+          <div class="card">
+            <b>UID:</b> ${x.uid}<br>
+            <b>Amount:</b> ₹${x.amount}<br>
+            <b>UPI:</b> ${x.upi || x.account}<br>
+            <b>Status:</b> ${x.status}<br>
+
+            <button class="approve" onclick="update('${d.id}','approved')">
+              Approve
+            </button>
+
+            <button class="reject" onclick="update('${d.id}','rejected')">
+              Reject
+            </button>
+          </div>`;
+        });
+        document.getElementById("list").innerHTML=html;
+      });
+  });
+});
+
+function update(id,status){
+  db.collection("withdraw_requests").doc(id).update({
+    status: status,
+    action_time: firebase.firestore.FieldValue.serverTimestamp()
+  });
+}
+</script>
+
+</body>
+</html>
