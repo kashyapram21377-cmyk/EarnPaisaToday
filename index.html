@@ -1,25 +1,93 @@
-<!-- SHARE SECTION -->
-<div style="margin-top:30px;text-align:left;max-width:400px">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>EarnPaisaToday</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<style>
+body{
+  margin:0;
+  font-family:Arial, sans-serif;
+  background:#f5f6fa;
+  text-align:center;
+}
+header{
+  background:#ff9800;
+  color:#fff;
+  padding:18px;
+  font-size:22px;
+  font-weight:bold;
+}
+.container{
+  padding:20px;
+  max-width:420px;
+  margin:auto;
+}
+.tagline{
+  color:#555;
+  margin-bottom:20px;
+}
+.btn{
+  display:block;
+  width:100%;
+  padding:14px;
+  margin:10px 0;
+  font-size:16px;
+  color:#fff;
+  background:#2196f3;
+  border:none;
+  border-radius:8px;
+  text-decoration:none;
+}
+.btn.orange{background:#ff9800;}
+.btn.green{background:#25D366;}
+.btn.blue{background:#1877f2;}
+.btn.sky{background:#229ED9;}
+.btn.dark{background:#444;}
+
+.footer{
+  margin-top:25px;
+  font-size:13px;
+  color:#777;
+}
+</style>
+</head>
+
+<body>
+
+<header>💸 EarnPaisaToday</header>
+
+<div class="container">
+
+<p class="tagline">International + Indian Real Earning Platform</p>
+
+<a class="btn" href="offers.html">🔥 Offers (Worldwide)</a>
+<a class="btn" href="games.html">🎮 Play & Earn</a>
+<a class="btn" href="withdraw.html">💳 Withdraw</a>
+
+<hr>
 
 <h3>📤 Share & Earn</h3>
 
-<a href="https://wa.me/?text=💸%20Earn%20money%20with%20EarnPaisaToday!%0A🔥%20Offers%20|%20🎮%20Games%20|%20💳%20Withdraw%0A👉%20https://kashyapram21377-cmyk.github.io/EarnPaisaToday/"
-   target="_blank"
-   class="btn">📱 Share on WhatsApp</a>
+<a class="btn green"
+href="https://wa.me/?text=💸 Earn money with EarnPaisaToday 👉 https://kashyapram21377-cmyk.github.io/EarnPaisaToday/"
+target="_blank">📱 Share on WhatsApp</a>
 
-<a href="https://www.facebook.com/sharer/sharer.php?u=https://kashyapram21377-cmyk.github.io/EarnPaisaToday/"
-   target="_blank"
-   class="btn"
-   style="background:#1877f2">📘 Share on Facebook</a>
+<a class="btn blue"
+href="https://www.facebook.com/sharer/sharer.php?u=https://kashyapram21377-cmyk.github.io/EarnPaisaToday/"
+target="_blank">📘 Share on Facebook</a>
 
-<a href="https://t.me/share/url?url=https://kashyapram21377-cmyk.github.io/EarnPaisaToday/&text=Earn%20money%20online%20with%20EarnPaisaToday"
-   target="_blank"
-   class="btn"
-   style="background:#229ED9">✈️ Share on Telegram</a>
+<a class="btn sky"
+href="https://t.me/share/url?url=https://kashyapram21377-cmyk.github.io/EarnPaisaToday/&text=Earn money online"
+target="_blank">✈️ Share on Telegram</a>
 
-<button class="btn" style="background:#555" onclick="copyLink()">🔗 Copy App Link</button>
+<button class="btn dark" onclick="copyLink()">🔗 Copy App Link</button>
+<button class="btn orange" onclick="systemShare()">📤 More Apps</button>
 
-<button class="btn" style="background:#ff9800" onclick="systemShare()">📤 More Apps</button>
+<div class="footer">
+🔒 Secure system | Fake earning blocked
+</div>
 
 </div>
 
@@ -35,11 +103,14 @@ function systemShare(){
   if(navigator.share){
     navigator.share({
       title:"EarnPaisaToday",
-      text:"💸 Earn money online with EarnPaisaToday",
+      text:"Earn money online with EarnPaisaToday",
       url:"https://kashyapram21377-cmyk.github.io/EarnPaisaToday/"
     });
   } else {
-    alert("Share not supported on this device");
+    alert("Share not supported");
   }
 }
 </script>
+
+</body>
+</html>
