@@ -1,1 +1,201 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Referral Leaderboard | Earn Paisa Today</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta name="description" content="Top referrers leaderboard on Earn Paisa Today. Invite friends and earn more with our referral program.">
+
+<!-- Firebase -->
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+
+<style>
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:Segoe UI,Arial;
+  background:#f4f6f8;
+  color:#222;
+}
+
+/* HEADER */
+header{
+  background:linear-gradient(135deg,#6a11cb,#2575fc);
+  color:#fff;
+  padding:28px 20px;
+  text-align:center;
+}
+header h1{margin:0;font-size:28px}
+header p{margin-top:6px;font-size:14px;opacity:.95}
+
+/* CONTAINER */
+.container{
+  max-width:900px;
+  margin:28px auto;
+  padding:0 16px;
+}
+
+/* CARD */
+.card{
+  background:#fff;
+  border-radius:18px;
+  padding:22px;
+  box-shadow:0 10px 26px rgba(0,0,0,.08);
+}
+
+/* TABLE */
+table{
+  width:100%;
+  border-collapse:collapse;
+  font-size:14px;
+}
+th,td{
+  padding:12px;
+  border-bottom:1px solid #eee;
+  text-align:left;
+}
+th{
+  background:#f3f6ff;
+  color:#333;
+}
+.rank{
+  font-weight:800;
+}
+.badge{
+  padding:4px 10px;
+  border-radius:12px;
+  font-size:12px;
+  font-weight:700;
+}
+.gold{background:#fff3cd;color:#856404}
+.silver{background:#e9ecef;color:#495057}
+.bronze{background:#fde2cf;color:#7a3e00}
+
+/* CTA */
+.cta{
+  margin-top:20px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  flex-wrap:wrap;
+  gap:10px;
+}
+.cta a{
+  padding:10px 18px;
+  border-radius:22px;
+  background:#2575fc;
+  color:#fff;
+  text-decoration:none;
+  font-size:14px;
+  font-weight:600;
+}
+
+/* FOOTER */
+footer{
+  margin-top:40px;
+  text-align:center;
+  font-size:13px;
+  color:#777;
+}
+footer a{color:#2575fc;text-decoration:none}
+</style>
+</head>
+
+<body>
+
+<header>
+  <h1>🏆 Referral Leaderboard</h1>
+  <p>Invite more • Earn more • Rank higher</p>
+</header>
+
+<div class="container">
+
+  <div class="card">
+    <table>
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>User</th>
+          <th>Referrals</th>
+          <th>Badge</th>
+        </tr>
+      </thead>
+      <tbody id="leaderList">
+        <tr><td colspan="4">Loading leaderboard...</td></tr>
+      </tbody>
+    </table>
+
+    <div class="cta">
+      <span>Want to rank higher?</span>
+      <a href="share.html">Share & Earn</a>
+      <a href="dashboard.html">Back to Dashboard</a>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  © 2026 Earn Paisa Today • <a href="index.html">Home</a>
+</footer>
+
+<script>
+/* FIREBASE CONFIG */
+const firebaseConfig={
+  apiKey:"AIzaSyBwd7y4uG955kZ5eg91ryn8bzbWzK2R_Ks",
+  authDomain:"earnpaisatoday.firebaseapp.com",
+  projectId:"earnpaisatoday"
+};
+firebase.initializeApp(firebaseConfig);
+
+const auth=firebase.auth();
+const db=firebase.firestore();
+
+/* AUTH OPTIONAL (PUBLIC VIEW ALLOWED) */
+loadLeaderboard();
+
+/* LOAD LEADERBOARD */
+function loadLeaderboard(){
+  const box=document.getElementById("leaderList");
+  box.innerHTML="";
+
+  db.collection("users")
+    .orderBy("referrals","desc")
+    .limit(20)
+    .onSnapshot(snap=>{
+      box.innerHTML="";
+      if(snap.empty){
+        box.innerHTML="<tr><td colspan='4'>No data</td></tr>";
+        return;
+      }
+
+      let rank=1;
+      snap.forEach(doc=>{
+        const u=doc.data();
+        const refs=u.referrals||0;
+
+        let badge="-";
+        let cls="";
+        if(rank===1){badge="Gold";cls="gold"}
+        else if(rank===2){badge="Silver";cls="silver"}
+        else if(rank===3){badge="Bronze";cls="bronze"}
+
+        box.innerHTML+=`
+          <tr>
+            <td class="rank">#${rank}</td>
+            <td>${(u.email||"User").replace(/(.{2}).+(@.+)/,"$1***$2")}</td>
+            <td>${refs}</td>
+            <td>${badge!=="-"?`<span class="badge ${cls}">${badge}</span>`:"-"}</td>
+          </tr>
+        `;
+        rank++;
+      });
+    });
+}
+</script>
+
+</body>
+</html>
