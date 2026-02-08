@@ -1,1 +1,240 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Admin KYC Approval | Earn Paisa Today</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta name="description" content="Admin KYC verification panel for Earn Paisa Today. Review, approve or reject user KYC securely.">
+
+<!-- Firebase -->
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+
+<style>
+/* ================== GLOBAL RESET ================== */
+*{ box-sizing:border-box; }
+
+/* ================== BODY ================== */
+body{
+  margin:0;
+  font-family:Segoe UI,Arial;
+  background:#f4f6f8;
+  color:#222;
+}
+
+/* ================== NAVBAR ================== */
+nav{
+  background:#111;
+  color:#fff;
+  padding:12px 24px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+/* ================== HERO ================== */
+header{
+  background:linear-gradient(135deg,#ff5722,#ff9800);
+  color:#fff;
+  padding:80px 20px;
+  text-align:center;
+}
+
+/* ================== MAIN CONTAINER ================== */
+.container{
+  max-width:1200px;
+  margin:60px auto;
+  padding:0 18px;
+}
+
+/* ================== SECTION TITLE ================== */
+.section-title{
+  font-size:30px;
+  margin:50px 0 22px;
+  border-left:6px solid #ff5722;
+  padding-left:12px;
+}
+
+/* ================== GRID ================== */
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:24px;
+}
+
+/* ================== CARD ================== */
+.card{
+  background:#fff;
+  border-radius:22px;
+  padding:26px;
+  box-shadow:0 10px 26px rgba(0,0,0,.08);
+  transition:.3s;
+}
+.card:hover{ transform:translateY(-6px); }
+
+/* ================== STATS ================== */
+.stats{
+  background:#fff;
+  border-radius:22px;
+  padding:32px;
+  margin:70px 0;
+  box-shadow:0 10px 26px rgba(0,0,0,.07);
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+  gap:20px;
+  text-align:center;
+}
+
+/* ================== FOOTER ================== */
+footer{
+  background:#0f172a;
+  color:#cbd5e1;
+  padding:36px 20px;
+  margin-top:50px;
+  font-size:14px;
+}
+.footer-grid{
+  max-width:1200px;
+  margin:auto;
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:28px;
+}
+.footer-bottom{
+  border-top:1px solid #1e293b;
+  margin-top:24px;
+  padding-top:14px;
+  text-align:center;
+  font-size:13px;
+  color:#94a3b8;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <h2>🪪 Admin KYC Approval Panel</h2>
+  <button onclick="logout()">Logout</button>
+</header>
+
+<div class="container">
+
+  <div class="card">
+    <h3>Pending KYC Requests</h3>
+
+    <table>
+      <thead>
+        <tr>
+          <th>User Email</th>
+          <th>Name</th>
+          <th>Country</th>
+          <th>ID Type</th>
+          <th>ID Number</th>
+          <th>Document</th>
+          <th>Status</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody id="kycList">
+        <tr><td colspan="8">Loading...</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>
+
+<script>
+/* FIREBASE CONFIG */
+const firebaseConfig={
+  apiKey:"AIzaSyBwd7y4uG955kZ5eg91ryn8bzbWzK2R_Ks",
+  authDomain:"earnpaisatoday.firebaseapp.com",
+  projectId:"earnpaisatoday"
+};
+firebase.initializeApp(firebaseConfig);
+
+const auth=firebase.auth();
+const db=firebase.firestore();
+const ADMIN_EMAIL="kashyapram21377@gmail.com";
+
+/* AUTH CHECK */
+auth.onAuthStateChanged(user=>{
+  if(!user || user.email!==ADMIN_EMAIL){
+    alert("Admin access only");
+    auth.signOut();
+    location.href="login.html";
+    return;
+  }
+  loadKYC();
+});
+
+/* LOAD KYC */
+function loadKYC(){
+  const box=document.getElementById("kycList");
+  box.innerHTML="";
+
+  db.collection("users")
+    .where("kyc.status","in",["pending","approved","rejected"])
+    .onSnapshot(snap=>{
+      box.innerHTML="";
+      if(snap.empty){
+        box.innerHTML="<tr><td colspan='8'>No KYC requests</td></tr>";
+        return;
+      }
+
+      snap.forEach(doc=>{
+        const u=doc.data();
+        if(!u.kyc) return;
+
+        box.innerHTML+=`
+        <tr>
+          <td>${u.email||"-"}</td>
+          <td>${u.kyc.name}</td>
+          <td>${u.kyc.country}</td>
+          <td>${u.kyc.type}</td>
+          <td>${u.kyc.number}</td>
+          <td>
+            <a href="${u.kyc.file}" target="_blank">
+              <button class="btn view">View</button>
+            </a>
+          </td>
+          <td>
+            <span class="badge ${u.kyc.status}">
+              ${u.kyc.status}
+            </span>
+          </td>
+          <td>
+            ${u.kyc.status==="pending"?`
+              <button class="btn approve"
+                onclick="updateKYC('${doc.id}','approved')">Approve</button>
+              <button class="btn reject"
+                onclick="updateKYC('${doc.id}','rejected')">Reject</button>
+            `:"-"}
+          </td>
+        </tr>
+        `;
+      });
+    });
+}
+
+/* UPDATE KYC */
+function updateKYC(uid,status){
+  if(!confirm("Confirm "+status+" KYC?")) return;
+
+  db.collection("users").doc(uid).update({
+    "kyc.status":status,
+    "kyc.reviewedAt":new Date()
+  });
+}
+
+/* LOGOUT */
+function logout(){
+  auth.signOut().then(()=>location.href="index.html");
+}
+</script>
+
+</body>
+</html>
