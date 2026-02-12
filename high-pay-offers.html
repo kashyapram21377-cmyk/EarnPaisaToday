@@ -4,16 +4,14 @@
 <meta charset="UTF-8">
 <title>High Pay Offers | Earn Paisa Today</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="High paying finance, ecommerce, travel & insurance offers from VCommission. Earn more with premium CPA campaigns.">
+<meta name="description" content="High paying finance, ecommerce, travel & insurance offers from VCommission.">
 
 <style>
 *{box-sizing:border-box}
-
 body{
   margin:0;
   font-family:Segoe UI,Arial;
   background:linear-gradient(135deg,#f4f6f9,#eef2ff);
-  color:#333;
 }
 
 /* HEADER */
@@ -22,26 +20,27 @@ header{
   color:#fff;
   padding:35px 20px;
   text-align:center;
-  box-shadow:0 10px 30px rgba(0,0,0,.15);
 }
+header h1{margin:0;font-size:28px}
+header p{margin-top:8px;font-size:14px;opacity:.9}
 
-header h1{
-  margin:0;
-  font-size:28px;
+/* SEARCH */
+.search-box{
+  text-align:center;
+  margin-top:20px;
 }
-
-header p{
-  margin-top:8px;
-  font-size:14px;
-  opacity:.9;
+.search-box input{
+  padding:12px 18px;
+  width:260px;
+  border-radius:25px;
+  border:1px solid #ccc;
 }
 
 /* FILTERS */
 .filters{
   text-align:center;
-  margin:30px 10px 10px;
+  margin:20px 10px;
 }
-
 .filters button{
   padding:10px 20px;
   margin:6px;
@@ -50,15 +49,8 @@ header p{
   cursor:pointer;
   background:#eaeaea;
   font-weight:600;
-  font-size:13px;
   transition:.3s;
 }
-
-.filters button:hover{
-  background:#ff5722;
-  color:#fff;
-}
-
 .filters button.active{
   background:#ff5722;
   color:#fff;
@@ -83,15 +75,11 @@ header p{
   border-radius:18px;
   box-shadow:0 12px 28px rgba(0,0,0,.08);
   transition:.35s;
-  overflow:hidden;
 }
-
 .card:hover{
-  transform:translateY(-8px);
+  transform:translateY(-6px);
   box-shadow:0 18px 35px rgba(0,0,0,.12);
 }
-
-/* RIBBON */
 .ribbon{
   position:absolute;
   top:15px;
@@ -103,8 +91,6 @@ header p{
   font-size:11px;
   font-weight:bold;
 }
-
-/* BADGE */
 .badge{
   display:inline-block;
   background:#ff5722;
@@ -112,22 +98,9 @@ header p{
   padding:5px 10px;
   font-size:11px;
   border-radius:12px;
-  margin-bottom:10px;
 }
-
-.card h3{
-  margin:10px 0;
-  font-size:16px;
-  min-height:40px;
-}
-
-.card p{
-  font-size:13px;
-  color:#666;
-  min-height:38px;
-}
-
-/* BUTTON */
+.card h3{margin:12px 0 8px;font-size:16px}
+.card p{font-size:13px;color:#666}
 .card a{
   display:block;
   margin-top:15px;
@@ -138,15 +111,7 @@ header p{
   text-decoration:none;
   border-radius:12px;
   font-weight:700;
-  font-size:13px;
-  transition:.3s;
 }
-
-.card a:hover{
-  opacity:.9;
-}
-
-/* FOOTER */
 footer{
   text-align:center;
   padding:25px;
@@ -154,11 +119,7 @@ footer{
   color:#aaa;
   font-size:13px;
 }
-
-footer a{
-  color:#ff5722;
-  text-decoration:none;
-}
+footer a{color:#ff5722;text-decoration:none}
 </style>
 </head>
 
@@ -169,12 +130,16 @@ footer a{
   <p>Premium CPA campaigns • High conversion • Verified payouts</p>
 </header>
 
+<div class="search-box">
+  <input id="searchBox" onkeyup="searchOffers()" placeholder="Search offers...">
+</div>
+
 <div class="filters">
-  <button onclick="filterOffers('all')" class="active">All</button>
-  <button onclick="filterOffers('finance')">Finance</button>
-  <button onclick="filterOffers('ecommerce')">Ecommerce</button>
-  <button onclick="filterOffers('travel')">Travel</button>
-  <button onclick="filterOffers('insurance')">Insurance</button>
+  <button data-cat="all" class="active" onclick="filterOffers('all',this)">All</button>
+  <button data-cat="finance" onclick="filterOffers('finance',this)">Finance</button>
+  <button data-cat="ecommerce" onclick="filterOffers('ecommerce',this)">Ecommerce</button>
+  <button data-cat="travel" onclick="filterOffers('travel',this)">Travel</button>
+  <button data-cat="insurance" onclick="filterOffers('insurance',this)">Insurance</button>
 </div>
 
 <div class="container" id="offersContainer"></div>
@@ -185,43 +150,68 @@ footer a{
 </footer>
 
 <script>
-const offers = [
 
-{cat:"finance",title:"Finance Campaign 1",desc:"High payout finance lead offer",link:"https://track.vcommission.com/t/MTI1NTYwXzEzMDQ3/"},
+/* OFFERS DATA */
+const offers = [
+{cat:"finance",title:"Finance Campaign 1",desc:"High payout finance lead offer",hot:true,link:"https://track.vcommission.com/t/MTI1NTYwXzEzMDQ3/"},
 {cat:"finance",title:"Finance Campaign 2",desc:"Loan / Credit card signup campaign",link:"https://track.vcommission.com/t/MTI1NTYwXzEzMDQ2/"},
-{cat:"ecommerce",title:"Ecommerce Campaign 1",desc:"Shopping affiliate high conversion",link:"https://track.vcommission.com/t/MTI1NTYwXzEyODU5/"},
+{cat:"ecommerce",title:"Ecommerce Campaign 1",desc:"Shopping affiliate high conversion",hot:true,link:"https://track.vcommission.com/t/MTI1NTYwXzEyODU5/"},
 {cat:"travel",title:"Travel Booking Offer",desc:"Flight & hotel bookings payout",link:"https://track.vcommission.com/t/MTI1NTYwXzEzMTE2/"},
 {cat:"insurance",title:"Insurance Lead Offer",desc:"Insurance signup commission",link:"https://track.vcommission.com/t/MTI1NTYwXzEyMTMx/"}
-
 ];
 
 const container=document.getElementById("offersContainer");
 
-function displayOffers(category){
+/* DISPLAY */
+function displayOffers(category,search=""){
   container.innerHTML="";
-  offers.forEach(o=>{
-    if(category==="all" || o.cat===category){
-      const card=document.createElement("div");
-      card.className="card";
-      card.innerHTML=`
-        <div class="ribbon">HOT</div>
-        <span class="badge">${o.cat.toUpperCase()}</span>
-        <h3>${o.title}</h3>
-        <p>${o.desc}</p>
-        <a href="${o.link}" target="_blank">Earn Now →</a>
-      `;
-      container.appendChild(card);
-    }
+
+  const filtered=offers.filter(o=>{
+    const catMatch = category==="all" || o.cat===category;
+    const searchMatch = o.title.toLowerCase().includes(search.toLowerCase());
+    return catMatch && searchMatch;
+  });
+
+  if(filtered.length===0){
+    container.innerHTML="<p>No offers found</p>";
+    return;
+  }
+
+  filtered.forEach(o=>{
+    const card=document.createElement("div");
+    card.className="card";
+    card.innerHTML=`
+      ${o.hot?'<div class="ribbon">HOT</div>':''}
+      <span class="badge">${o.cat.toUpperCase()}</span>
+      <h3>${o.title}</h3>
+      <p>${o.desc}</p>
+      <a href="${o.link}" target="_blank">Earn Now →</a>
+    `;
+    container.appendChild(card);
   });
 }
 
-function filterOffers(cat){
-  document.querySelectorAll(".filters button").forEach(b=>b.classList.remove("active"));
-  event.target.classList.add("active");
-  displayOffers(cat);
+/* FILTER */
+function filterOffers(cat,btn){
+  document.querySelectorAll(".filters button")
+    .forEach(b=>b.classList.remove("active"));
+  btn.classList.add("active");
+
+  const search=document.getElementById("searchBox").value;
+  displayOffers(cat,search);
 }
 
+/* SEARCH */
+function searchOffers(){
+  const search=document.getElementById("searchBox").value;
+  const active=document.querySelector(".filters button.active");
+  const cat=active?active.dataset.cat:"all";
+  displayOffers(cat,search);
+}
+
+/* INIT */
 displayOffers("all");
+
 </script>
 
 </body>
