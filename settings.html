@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,97 +5,133 @@
 <title>Account Settings & KYC | Earn Paisa Today</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<meta name="description" content="Manage your profile, KYC, security settings and account preferences securely on Earn Paisa Today.">
+<meta name="description" content="Securely manage profile, KYC verification, security settings and account preferences.">
 
-<!-- Firebase -->
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-storage-compat.js"></script>
 
 <style>
-*{box-sizing:border-box}
+*{margin:0;padding:0;box-sizing:border-box}
+
 body{
-  margin:0;
-  font-family:Segoe UI,Arial;
-  background:#f4f6f8;
-  color:#222;
+  font-family:'Segoe UI',Arial;
+  background:#f3f4f6;
+  color:#1f2937;
 }
+
+/* HEADER */
 header{
-  background:#0d47a1;
+  background:#0f172a;
   color:#fff;
-  padding:14px 20px;
+  padding:18px 24px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
 }
-header h2{margin:0;font-size:20px}
+header h2{font-size:20px}
+header a{
+  color:#fff;
+  text-decoration:none;
+  font-size:14px;
+}
 
+/* CONTAINER */
 .container{
-  max-width:1000px;
-  margin:28px auto;
-  padding:0 16px;
+  max-width:1100px;
+  margin:40px auto;
+  padding:0 20px;
 }
 
+/* CARD */
 .card{
   background:#fff;
-  border-radius:18px;
-  padding:24px;
-  box-shadow:0 10px 26px rgba(0,0,0,.08);
-  margin-bottom:24px;
+  border-radius:20px;
+  padding:26px;
+  box-shadow:0 12px 30px rgba(0,0,0,.08);
+  margin-bottom:26px;
 }
-.card h3{margin-top:0;font-size:20px}
+.card h3{
+  margin-bottom:16px;
+  font-size:18px;
+}
 
+/* INPUT */
 label{
   display:block;
   margin-top:14px;
+  font-size:13px;
   font-weight:600;
-  font-size:14px;
 }
 input,select{
   width:100%;
   padding:12px;
   margin-top:6px;
   border-radius:10px;
-  border:1px solid #ddd;
+  border:1px solid #d1d5db;
   font-size:14px;
 }
 
+/* BUTTON */
 button{
   margin-top:18px;
-  padding:12px 26px;
+  padding:12px 24px;
   border:none;
-  border-radius:22px;
-  background:#0d47a1;
+  border-radius:12px;
+  background:#2563eb;
   color:#fff;
   font-size:14px;
   font-weight:600;
   cursor:pointer;
 }
-button.danger{background:#d32f2f}
+button.danger{background:#dc2626}
 
-.msg{margin-top:10px;font-size:13px}
-.ok{color:green}
-.err{color:#d32f2f}
+/* STATUS BADGE */
+.badge{
+  padding:6px 14px;
+  border-radius:30px;
+  font-size:12px;
+  font-weight:600;
+}
+.pending{background:#fff3cd;color:#92400e}
+.approved{background:#d1fae5;color:#065f46}
+.rejected{background:#fee2e2;color:#991b1b}
 
-/* PROFILE PHOTO */
+/* PHOTO */
 .photo-box{
   display:flex;
   align-items:center;
-  gap:16px;
+  gap:18px;
 }
 .photo-box img{
   width:90px;height:90px;
   border-radius:50%;
   object-fit:cover;
-  border:3px solid #ddd;
+  border:3px solid #e5e7eb;
 }
 
 /* GRID */
 .grid{
   display:grid;
   grid-template-columns:1fr 1fr;
-  gap:16px;
+  gap:18px;
 }
-@media(max-width:700px){
+@media(max-width:768px){
   .grid{grid-template-columns:1fr}
+}
+
+/* MESSAGE */
+.msg{margin-top:10px;font-size:13px}
+.ok{color:#16a34a}
+.err{color:#dc2626}
+
+.info{
+  background:#eff6ff;
+  padding:12px;
+  border-radius:10px;
+  font-size:13px;
+  margin-top:14px;
 }
 </style>
 </head>
@@ -104,98 +139,107 @@ button.danger{background:#d32f2f}
 <body>
 
 <header>
-  <h2>⚙️ Account Settings & KYC</h2>
+  <h2>⚙️ Account Settings</h2>
+  <a href="dashboard.html">← Back to Dashboard</a>
 </header>
 
 <div class="container">
 
-  <!-- PROFILE -->
-  <div class="card">
-    <h3>👤 Profile</h3>
-    <div class="photo-box">
-      <img id="profileImg" src="https://via.placeholder.com/90">
-      <input type="file" id="photoInput">
+<!-- PROFILE -->
+<div class="card">
+  <h3>👤 Profile Information</h3>
+
+  <div class="photo-box">
+    <img id="profileImg" src="https://via.placeholder.com/90">
+    <div>
+      <input type="file" id="photoInput" accept="image/*">
+      <button onclick="uploadPhoto()">Update Photo</button>
+      <div id="photoMsg" class="msg"></div>
     </div>
-
-    <label>Email</label>
-    <input type="email" id="email" disabled>
-
-    <button onclick="uploadPhoto()">Update Profile Photo</button>
-    <div id="photoMsg" class="msg"></div>
   </div>
 
-  <!-- KYC -->
-  <div class="card">
-    <h3>🪪 KYC Verification</h3>
-    <div class="grid">
-      <div>
-        <label>Full Name (as per ID)</label>
-        <input id="kycName" placeholder="Your full name">
-      </div>
-      <div>
-        <label>Country</label>
-        <select id="kycCountry">
-          <option value="">Select Country</option>
-          <option>India</option>
-          <option>United States</option>
-          <option>United Kingdom</option>
-          <option>Other</option>
-        </select>
-      </div>
-      <div>
-        <label>ID Type</label>
-        <select id="kycType">
-          <option value="">Select ID</option>
-          <option>Aadhaar</option>
-          <option>PAN</option>
-          <option>Passport</option>
-          <option>Driving License</option>
-        </select>
-      </div>
-      <div>
-        <label>ID Number</label>
-        <input id="kycNumber" placeholder="ID number">
-      </div>
+  <label>Email</label>
+  <input type="email" id="email" disabled>
+
+  <div class="info">
+    Profile photo and email are securely managed using Firebase authentication.
+  </div>
+</div>
+
+<!-- KYC -->
+<div class="card">
+  <h3>🪪 KYC Verification</h3>
+
+  <div id="kycStatusBox"></div>
+
+  <div class="grid">
+    <div>
+      <label>Full Name</label>
+      <input id="kycName">
     </div>
-
-    <label style="margin-top:14px">Upload ID Proof</label>
-    <input type="file" id="kycFile">
-
-    <button onclick="submitKYC()">Submit KYC</button>
-    <div id="kycMsg" class="msg"></div>
+    <div>
+      <label>Country</label>
+      <select id="kycCountry">
+        <option value="">Select Country</option>
+        <option>India</option>
+        <option>United States</option>
+        <option>United Kingdom</option>
+        <option>Other</option>
+      </select>
+    </div>
+    <div>
+      <label>ID Type</label>
+      <select id="kycType">
+        <option value="">Select ID</option>
+        <option>Aadhaar</option>
+        <option>PAN</option>
+        <option>Passport</option>
+        <option>Driving License</option>
+      </select>
+    </div>
+    <div>
+      <label>ID Number</label>
+      <input id="kycNumber">
+    </div>
   </div>
 
-  <!-- SECURITY -->
-  <div class="card">
-    <h3>🔐 Security</h3>
+  <label>Upload ID Proof</label>
+  <input type="file" id="kycFile" accept="image/*,.pdf">
 
-    <button onclick="resetPassword()">Reset Password</button>
-    <div id="passMsg" class="msg"></div>
+  <button onclick="submitKYC()">Submit KYC</button>
+  <div id="kycMsg" class="msg"></div>
+</div>
 
-    <label>Change Email</label>
-    <input id="newEmail" type="email" placeholder="New email">
-    <button onclick="changeEmail()">Update Email</button>
-    <div id="emailMsg" class="msg"></div>
+<!-- SECURITY -->
+<div class="card">
+  <h3>🔐 Security Settings</h3>
 
-    <p style="font-size:13px;color:#555;margin-top:14px">
-      🔒 Two-step verification is handled by Firebase authentication (email / Google security).
-    </p>
+  <button onclick="resetPassword()">Send Password Reset Email</button>
+  <div id="passMsg" class="msg"></div>
+
+  <label>Change Email</label>
+  <input id="newEmail" type="email">
+  <button onclick="changeEmail()">Update Email</button>
+  <div id="emailMsg" class="msg"></div>
+
+  <div class="info">
+    Two-factor authentication is handled securely by Firebase.
   </div>
+</div>
 
-  <!-- DELETE -->
-  <div class="card">
-    <h3>⚠️ Account Removal</h3>
-    <p style="font-size:14px;color:#555">
-      Request permanent account deletion. This action cannot be undone.
-    </p>
-    <button class="danger" onclick="deleteAccount()">Delete Account</button>
-    <div id="delMsg" class="msg"></div>
-  </div>
+<!-- DELETE -->
+<div class="card">
+  <h3>⚠️ Delete Account</h3>
+  <p style="font-size:14px;color:#555">
+    This action is permanent and cannot be undone.
+  </p>
+  <button class="danger" onclick="deleteAccount()">Delete Account</button>
+  <div id="delMsg" class="msg"></div>
+</div>
 
 </div>
 
 <script>
-/* FIREBASE CONFIG */
 const firebaseConfig={
   apiKey:"AIzaSyBwd7y4uG955kZ5eg91ryn8bzbWzK2R_Ks",
   authDomain:"earnpaisatoday.firebaseapp.com",
@@ -216,29 +260,38 @@ auth.onAuthStateChanged(u=>{
   user=u;
   email.value=u.email;
   if(u.photoURL) profileImg.src=u.photoURL;
+  loadKYC();
 });
+
+/* LOAD KYC STATUS */
+function loadKYC(){
+  db.collection("users").doc(user.uid).get().then(doc=>{
+    if(!doc.exists||!doc.data().kyc)return;
+    const k=doc.data().kyc;
+    kycStatusBox.innerHTML=
+      `<p>KYC Status:
+      <span class="badge ${k.status}">${k.status.toUpperCase()}</span></p>`;
+  });
+}
 
 /* PHOTO */
 function uploadPhoto(){
   const file=photoInput.files[0];
-  if(!file){photoMsg.innerHTML="<span class='err'>Select image</span>";return;}
-  const ref=storage.ref("profile_photos/"+user.uid);
+  if(!file)return photoMsg.innerHTML="<span class='err'>Select image</span>";
+
+  const ref=storage.ref("profile/"+user.uid);
   ref.put(file).then(()=>ref.getDownloadURL())
-  .then(url=>{
-    return user.updateProfile({photoURL:url}).then(()=>{
-      profileImg.src=url;
-      photoMsg.innerHTML="<span class='ok'>Photo updated</span>";
-    });
+  .then(url=>user.updateProfile({photoURL:url}))
+  .then(()=>{
+    profileImg.src=user.photoURL;
+    photoMsg.innerHTML="<span class='ok'>Photo updated</span>";
   }).catch(e=>photoMsg.innerHTML="<span class='err'>"+e.message+"</span>");
 }
 
 /* KYC */
 function submitKYC(){
-  if(!kycName.value||!kycCountry.value||!kycType.value||!kycNumber.value){
-    kycMsg.innerHTML="<span class='err'>Fill all KYC fields</span>";return;
-  }
   const file=kycFile.files[0];
-  if(!file){kycMsg.innerHTML="<span class='err'>Upload ID proof</span>";return;}
+  if(!file)return kycMsg.innerHTML="<span class='err'>Upload file</span>";
 
   const ref=storage.ref("kyc/"+user.uid);
   ref.put(file).then(()=>ref.getDownloadURL())
@@ -254,31 +307,26 @@ function submitKYC(){
         submittedAt:new Date()
       }
     },{merge:true});
-  }).then(()=>{
-    kycMsg.innerHTML="<span class='ok'>KYC submitted (Pending approval)</span>";
-  }).catch(e=>kycMsg.innerHTML="<span class='err'>"+e.message+"</span>");
+  })
+  .then(()=>kycMsg.innerHTML="<span class='ok'>KYC Submitted</span>")
+  .catch(e=>kycMsg.innerHTML="<span class='err'>"+e.message+"</span>");
 }
 
-/* PASSWORD RESET */
+/* SECURITY */
 function resetPassword(){
   auth.sendPasswordResetEmail(user.email)
-  .then(()=>passMsg.innerHTML="<span class='ok'>Reset email sent</span>")
+  .then(()=>passMsg.innerHTML="<span class='ok'>Email sent</span>")
   .catch(e=>passMsg.innerHTML="<span class='err'>"+e.message+"</span>");
 }
 
-/* CHANGE EMAIL */
 function changeEmail(){
-  if(!newEmail.value){emailMsg.innerHTML="<span class='err'>Enter email</span>";return;}
   user.updateEmail(newEmail.value)
-  .then(()=>{
-    email.value=newEmail.value;
-    emailMsg.innerHTML="<span class='ok'>Email updated</span>";
-  }).catch(e=>emailMsg.innerHTML="<span class='err'>"+e.message+"</span>");
+  .then(()=>emailMsg.innerHTML="<span class='ok'>Updated</span>")
+  .catch(e=>emailMsg.innerHTML="<span class='err'>"+e.message+"</span>");
 }
 
-/* DELETE */
 function deleteAccount(){
-  if(!confirm("Delete account permanently?"))return;
+  if(!confirm("Delete permanently?"))return;
   user.delete()
   .then(()=>location.href="index.html")
   .catch(e=>delMsg.innerHTML="<span class='err'>"+e.message+"</span>");
