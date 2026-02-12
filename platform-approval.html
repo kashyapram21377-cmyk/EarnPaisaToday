@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,184 +5,238 @@
 <title>Platform Approval & Compliance | Earn Paisa Today</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<meta name="description" content="Platform approval, compliance, transparency and earning model of Earn Paisa Today. AdSense-safe and international ready.">
-<meta name="robots" content="index, follow">
+<meta name="description" content="Official compliance, transparency, earning model and platform approval information for Earn Paisa Today. Designed for AdSense and international standards.">
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
 
 <style>
-*{box-sizing:border-box}
+*{margin:0;padding:0;box-sizing:border-box}
+
 body{
-  margin:0;
-  font-family:Segoe UI,Arial;
-  background:#f4f6f8;
-  color:#222;
+  font-family:'Poppins',sans-serif;
+  background:#f3f4f6;
+  color:#1f2937;
 }
+
+/* NAV */
+nav{
+  background:#111827;
+  padding:14px 24px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+nav .logo{
+  color:#fff;
+  font-weight:700;
+}
+nav a{
+  color:#fff;
+  text-decoration:none;
+  margin-left:18px;
+  font-size:14px;
+}
+
+/* HERO */
 header{
   background:linear-gradient(135deg,#0f2027,#203a43,#2c5364);
   color:#fff;
-  padding:48px 20px;
+  padding:70px 20px;
   text-align:center;
 }
-header h1{margin:0;font-size:34px}
-header p{margin-top:10px;font-size:15px;opacity:.95}
+header h1{font-size:34px;margin-bottom:10px}
+header p{font-size:15px;opacity:.9}
 
+/* BADGE STRIP */
+.badge-strip{
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  gap:14px;
+  margin-top:20px;
+}
+.badge{
+  padding:6px 16px;
+  border-radius:30px;
+  font-size:12px;
+  font-weight:600;
+}
+.ok{background:#16a34a;color:#fff}
+.info{background:#2563eb;color:#fff}
+.warn{background:#ea580c;color:#fff}
+
+/* CONTAINER */
 .container{
   max-width:1150px;
-  margin:40px auto;
-  padding:0 16px;
+  margin:50px auto;
+  padding:0 20px;
 }
 
+/* CARD */
 .card{
   background:#fff;
   border-radius:18px;
   padding:28px;
-  box-shadow:0 12px 30px rgba(0,0,0,.08);
+  box-shadow:0 12px 28px rgba(0,0,0,.08);
   margin-bottom:28px;
 }
-
 .card h2{
-  margin-top:0;
-  font-size:22px;
-  border-left:6px solid #203a43;
+  margin-bottom:14px;
+  font-size:20px;
+  border-left:6px solid #2563eb;
   padding-left:12px;
 }
-
 .card p, .card li{
-  font-size:15px;
-  color:#444;
+  font-size:14px;
   line-height:1.8;
+  color:#4b5563;
+}
+ul{padding-left:20px}
+
+/* GRID */
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+  gap:22px;
 }
 
-ul{padding-left:22px}
-
-.badges span{
-  display:inline-block;
-  margin:6px 10px 0 0;
-  padding:6px 16px;
-  border-radius:20px;
+/* INFO BOX */
+.highlight{
+  background:#eff6ff;
+  border-left:6px solid #2563eb;
+  padding:16px;
+  border-radius:12px;
   font-size:13px;
-  font-weight:700;
 }
-.ok{background:#e8f5e9;color:#1b5e20}
-.warn{background:#fff3e0;color:#e65100}
-.info{background:#e3f2fd;color:#0d47a1}
 
+/* LINK BUTTONS */
 .links a{
   display:inline-block;
-  margin:8px 12px 0 0;
-  padding:10px 20px;
-  border-radius:24px;
-  background:#203a43;
+  margin:8px 10px 0 0;
+  padding:10px 22px;
+  border-radius:25px;
+  background:#111827;
   color:#fff;
   text-decoration:none;
-  font-size:14px;
-}
-
-footer{
-  margin-top:50px;
-  background:#111;
-  color:#aaa;
-  text-align:center;
-  padding:24px;
   font-size:13px;
 }
-footer a{color:#ccc;text-decoration:none;margin:0 6px}
+
+/* FOOTER */
+footer{
+  margin-top:70px;
+  background:#0f172a;
+  color:#cbd5e1;
+  text-align:center;
+  padding:30px;
+  font-size:13px;
+}
+footer a{
+  color:#e2e8f0;
+  text-decoration:none;
+}
+footer a:hover{text-decoration:underline}
 </style>
 </head>
 
 <body>
 
+<nav>
+  <div class="logo">Earn Paisa Today</div>
+  <div>
+    <a href="index.html">Home</a>
+    <a href="dashboard.html">Dashboard</a>
+    <a href="contact-us.html">Contact</a>
+  </div>
+</nav>
+
 <header>
   <h1>Platform Approval & Compliance</h1>
   <p>Transparent • Legal • AdSense & Affiliate Ready</p>
+
+  <div class="badge-strip">
+    <span class="badge ok">Active Platform</span>
+    <span class="badge ok">AdSense Safe</span>
+    <span class="badge ok">Affiliate Compliant</span>
+    <span class="badge info">International Ready</span>
+    <span class="badge warn">No Guaranteed Income</span>
+  </div>
 </header>
 
 <div class="container">
 
-  <!-- PLATFORM STATUS -->
-  <div class="card">
-    <h2>1. Platform Status</h2>
-    <div class="badges">
-      <span class="ok">Active Platform</span>
-      <span class="ok">AdSense Safe</span>
-      <span class="ok">Affiliate Ready</span>
-      <span class="ok">International Users Allowed</span>
-    </div>
-    <p>
-      <strong>Earn Paisa Today</strong> is a digital earning-information and
-      user-support platform. We do not operate as an investment company,
-      gambling service, or job guarantee provider.
-    </p>
+<div class="card">
+  <h2>1. Platform Overview</h2>
+  <p>
+    Earn Paisa Today is an earning-information and affiliate support platform.
+    We provide curated earning opportunities including affiliate programs,
+    survey networks and global CPA platforms.
+  </p>
+  <div class="highlight">
+    We are NOT an investment company, MLM scheme, job placement agency,
+    gambling platform or financial advisory service.
   </div>
+</div>
 
-  <!-- COMPLIANCE -->
-  <div class="card">
-    <h2>2. Compliance & Regulations</h2>
-    <ul>
-      <li>Complies with Google AdSense Publisher Policies</li>
-      <li>Respects international data protection standards</li>
-      <li>No misleading, false, or guaranteed earning claims</li>
-      <li>No prohibited or restricted content categories</li>
-    </ul>
-    <span class="info">Designed for long-term compliance</span>
-  </div>
+<div class="card">
+  <h2>2. Compliance & Advertising Standards</h2>
+  <ul>
+    <li>Designed to follow Google AdSense Publisher Policies</li>
+    <li>No misleading income claims</li>
+    <li>No adult, illegal or restricted content</li>
+    <li>Affiliate disclosure transparency maintained</li>
+    <li>Clear earning model explanation provided</li>
+  </ul>
+</div>
 
-  <!-- EARNING MODEL -->
-  <div class="card">
-    <h2>3. Earning Model Transparency</h2>
-    <p>Earn Paisa Today generates revenue through:</p>
-    <ul>
-      <li>Affiliate marketing (shopping, finance, apps)</li>
-      <li>CPA & survey partnerships (India & international)</li>
-      <li>Display advertising (Google AdSense)</li>
-    </ul>
-    <p>
-      User earnings depend entirely on third-party platforms
-      and individual effort. We do not control partner payouts.
-    </p>
-    <span class="warn">No earnings are guaranteed</span>
-  </div>
+<div class="card">
+  <h2>3. Revenue & Earning Model Transparency</h2>
+  <p>Revenue sources include:</p>
+  <ul>
+    <li>Affiliate marketing (shopping, finance, apps)</li>
+    <li>CPA & survey partner networks</li>
+    <li>Display advertising (Google AdSense)</li>
+  </ul>
+  <p>
+    User earnings depend entirely on third-party platforms and individual effort.
+    We do not control approval, payouts or eligibility decisions.
+  </p>
+</div>
 
-  <!-- USER RESPONSIBILITY -->
-  <div class="card">
-    <h2>4. User Responsibility & Fair Usage</h2>
-    <ul>
-      <li>Only one account per user is allowed</li>
-      <li>Fake traffic, bots, or spam are strictly prohibited</li>
-      <li>KYC may be required for withdrawals</li>
-      <li>Violations may result in account suspension</li>
-    </ul>
-  </div>
+<div class="card">
+  <h2>4. User Responsibility & Fair Usage Policy</h2>
+  <ul>
+    <li>One account per user only</li>
+    <li>No bots, fake traffic or fraudulent activity</li>
+    <li>KYC verification may be required</li>
+    <li>Policy violation may result in suspension</li>
+  </ul>
+</div>
 
-  <!-- THIRD PARTY -->
-  <div class="card">
-    <h2>5. Third-Party & Partner Disclaimer</h2>
-    <p>
-      All external links redirect to third-party platforms.
-      Earn Paisa Today does not own or operate these platforms
-      and is not responsible for their terms, policies, or decisions.
-    </p>
-  </div>
+<div class="card">
+  <h2>5. Third-Party & External Links</h2>
+  <p>
+    External links redirect to independent third-party platforms.
+    Earn Paisa Today does not own or operate those services
+    and is not responsible for their internal policies or payout decisions.
+  </p>
+</div>
 
-  <!-- SECURITY -->
-  <div class="card">
-    <h2>6. Security & Data Protection</h2>
-    <p>
-      Authentication, data storage, and access control are
-      handled securely using Firebase infrastructure.
-      Reasonable technical measures are implemented to
-      protect user data.
-    </p>
-  </div>
+<div class="card">
+  <h2>6. Data Security & Infrastructure</h2>
+  <p>
+    User authentication and database management are handled via secure
+    cloud infrastructure (Firebase technology).
+    Standard technical safeguards are implemented for account protection.
+  </p>
+</div>
 
-  <!-- IMPORTANT LINKS -->
-  <div class="card links">
-    <h2>7. Important Legal Links</h2>
-    <a href="privacy-policy.html">Privacy Policy</a>
-    <a href="terms-conditions.html">Terms & Conditions</a>
-    <a href="disclaimer.html">Disclaimer</a>
-    <a href="contact-us.html">Contact Us</a>
-    <a href="index.html">Home</a>
-  </div>
+<div class="card links">
+  <h2>7. Legal & Policy Links</h2>
+  <a href="privacy-policy.html">Privacy Policy</a>
+  <a href="terms-conditions.html">Terms & Conditions</a>
+  <a href="disclaimer.html">Disclaimer</a>
+  <a href="contact-us.html">Contact Us</a>
+</div>
 
 </div>
 
