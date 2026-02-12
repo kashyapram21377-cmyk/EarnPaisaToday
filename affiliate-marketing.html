@@ -4,228 +4,281 @@
 <meta charset="UTF-8">
 <title>Affiliate Marketing – Earn Paisa Today</title>
 
-<meta name="description" content="Earn money online with high paying affiliate programs. Credit cards, shopping offers, surveys & work from home opportunities. Trusted & genuine." />
-<meta name="keywords" content="affiliate marketing india, earn money online, credit card affiliate, shopping affiliate, earn paisa today" />
+<meta name="description" content="Earn money online with high paying affiliate programs. Credit cards, shopping offers, surveys & work from home opportunities." />
+<meta name="keywords" content="affiliate marketing india, earn money online, credit card affiliate, shopping affiliate" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<!-- Font -->
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 
 <style>
-/* ================== GLOBAL RESET ================== */
-*{ box-sizing:border-box; }
-
-/* ================== BODY ================== */
+*{margin:0;padding:0;box-sizing:border-box}
 body{
-  margin:0;
-  font-family:Segoe UI,Arial;
+  font-family:'Poppins',sans-serif;
   background:#f4f6f8;
   color:#222;
 }
 
-/* ================== NAVBAR ================== */
+/* NAVBAR */
 nav{
   background:#111;
+  padding:15px 25px;
   color:#fff;
-  padding:12px 24px;
   display:flex;
   justify-content:space-between;
   align-items:center;
+  position:sticky;
+  top:0;
+  z-index:1000;
+}
+nav a{
+  color:#fff;
+  text-decoration:none;
+  margin-left:20px;
+  font-size:14px;
 }
 
-/* ================== HERO ================== */
+/* HERO */
 header{
   background:linear-gradient(135deg,#ff5722,#ff9800);
   color:#fff;
-  padding:80px 20px;
   text-align:center;
+  padding:90px 20px;
 }
+header h1{font-size:38px;margin-bottom:15px}
+header p{font-size:18px;opacity:.9}
 
-/* ================== MAIN CONTAINER ================== */
+/* CONTAINER */
 .container{
   max-width:1200px;
   margin:60px auto;
-  padding:0 18px;
+  padding:0 20px;
 }
 
-/* ================== SECTION TITLE ================== */
+/* SECTION TITLE */
 .section-title{
-  font-size:30px;
-  margin:50px 0 22px;
-  border-left:6px solid #ff5722;
+  font-size:26px;
+  margin:50px 0 25px;
+  border-left:5px solid #ff5722;
   padding-left:12px;
 }
 
-/* ================== GRID ================== */
+/* GRID */
 .grid{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-  gap:24px;
+  gap:25px;
 }
 
-/* ================== CARD ================== */
+/* CARD */
 .card{
   background:#fff;
-  border-radius:22px;
-  padding:26px;
-  box-shadow:0 10px 26px rgba(0,0,0,.08);
+  border-radius:18px;
+  padding:25px;
+  box-shadow:0 10px 25px rgba(0,0,0,.07);
   transition:.3s;
 }
-.card:hover{ transform:translateY(-6px); }
+.card:hover{
+  transform:translateY(-6px);
+  box-shadow:0 15px 35px rgba(0,0,0,.12);
+}
+.card h3{margin-bottom:10px}
+.card p{font-size:14px;color:#555;margin-bottom:15px}
 
-/* ================== STATS ================== */
-.stats{
-  background:#fff;
-  border-radius:22px;
-  padding:32px;
-  margin:70px 0;
-  box-shadow:0 10px 26px rgba(0,0,0,.07);
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
-  gap:20px;
-  text-align:center;
+/* BUTTON */
+.btn{
+  display:inline-block;
+  padding:10px 18px;
+  background:#ff5722;
+  color:#fff;
+  text-decoration:none;
+  border-radius:25px;
+  font-size:14px;
+  font-weight:600;
+  transition:.3s;
+}
+.btn:hover{background:#e64a19}
+
+/* BADGE */
+.badge{
+  background:#16a34a;
+  color:#fff;
+  padding:4px 10px;
+  font-size:11px;
+  border-radius:20px;
+  display:inline-block;
+  margin-bottom:8px;
 }
 
-/* ================== FOOTER ================== */
+/* TRUST SECTION */
+.trust{
+  background:#fff;
+  padding:40px;
+  margin:70px 0;
+  border-radius:20px;
+  box-shadow:0 10px 25px rgba(0,0,0,.06);
+  text-align:center;
+}
+.trust h2{margin-bottom:15px}
+.trust p{color:#555}
+
+/* CTA */
+.cta{
+  background:linear-gradient(135deg,#0f172a,#1e293b);
+  color:#fff;
+  padding:50px 20px;
+  text-align:center;
+  border-radius:20px;
+  margin-top:60px;
+}
+.cta h2{margin-bottom:15px}
+.cta .btn{background:#ff9800}
+
+/* FOOTER */
 footer{
   background:#0f172a;
   color:#cbd5e1;
-  padding:36px 20px;
-  margin-top:50px;
+  text-align:center;
+  padding:30px;
+  margin-top:70px;
   font-size:14px;
 }
-.footer-grid{
-  max-width:1200px;
-  margin:auto;
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-  gap:28px;
-}
-.footer-bottom{
-  border-top:1px solid #1e293b;
-  margin-top:24px;
-  padding-top:14px;
-  text-align:center;
-  font-size:13px;
-  color:#94a3b8;
+footer a{
+  color:#ff9800;
+  text-decoration:none;
 }
 </style>
 </head>
 
 <body>
 
+<nav>
+  <div><b>Earn Paisa Today</b></div>
+  <div>
+    <a href="index.html">Home</a>
+    <a href="dashboard.html">Dashboard</a>
+    <a href="payment-proof.html">Proof</a>
+  </div>
+</nav>
+
 <header>
   <h1>Affiliate Marketing</h1>
-  <p>High Paying & Genuine Affiliate Programs – Start Earning Today</p>
+  <p>High Paying & Genuine Affiliate Programs – Start Earning Today 💰</p>
 </header>
 
 <div class="container">
 
-  <!-- CREDIT CARDS -->
-  <h2 class="section-title">💳 Credit Cards & Banking (High Pay)</h2>
-  <div class="cards">
-    <div class="card">
-      <span class="badge">High Commission</span>
-      <h3>Axis Bank Credit Cards</h3>
-      <p>Apply online & earn commission on every approved credit card.</p>
-      <a href="https://bitli.in/Uj7aDlv" target="_blank" class="btn">Apply Now</a>
-    </div>
+<!-- CREDIT CARDS -->
+<h2 class="section-title">💳 Credit Cards & Banking</h2>
+<div class="grid">
 
-    <div class="card">
-      <span class="badge">Premium</span>
-      <h3>Axis Magnus Credit Card</h3>
-      <p>Premium credit card with high rewards & benefits.</p>
-      <a href="https://bitli.in/T5TvBgI" target="_blank" class="btn">Apply Now</a>
-    </div>
+<div class="card">
+<span class="badge">High Commission</span>
+<h3>Axis Bank Credit Cards</h3>
+<p>Earn commission on every approved credit card application.</p>
+<a href="https://bitli.in/Uj7aDlv" target="_blank" class="btn">Apply Now</a>
+</div>
 
-    <div class="card">
-      <h3>SBI Credit Card</h3>
-      <p>India’s trusted credit card program.</p>
-      <a href="https://bitli.in/5o3o3tt" target="_blank" class="btn">Apply Now</a>
-    </div>
+<div class="card">
+<span class="badge">Premium</span>
+<h3>Axis Magnus Card</h3>
+<p>Premium rewards card with high payouts.</p>
+<a href="https://bitli.in/T5TvBgI" target="_blank" class="btn">Apply Now</a>
+</div>
 
-    <div class="card">
-      <h3>IDFC Bank</h3>
-      <p>Instant approval & good payouts.</p>
-      <a href="https://bitli.in/BMQPnBv" target="_blank" class="btn">Apply Now</a>
-    </div>
-  </div>
+<div class="card">
+<h3>SBI Credit Card</h3>
+<p>India’s trusted banking affiliate program.</p>
+<a href="https://bitli.in/5o3o3tt" target="_blank" class="btn">Apply Now</a>
+</div>
 
-  <!-- SHOPPING -->
-  <h2 class="section-title" style="margin-top:40px;">🛒 Shopping & Lifestyle</h2>
-  <div class="cards">
-    <div class="card">
-      <h3>Flipkart</h3>
-      <p>Earn commission on every purchase.</p>
-      <a href="https://fktr.in/JZCv94j" target="_blank" class="btn">Shop Now</a>
-    </div>
+<div class="card">
+<h3>IDFC Bank</h3>
+<p>Fast approval & strong affiliate payouts.</p>
+<a href="https://bitli.in/BMQPnBv" target="_blank" class="btn">Apply Now</a>
+</div>
 
-    <div class="card">
-      <h3>Myntra</h3>
-      <p>Fashion shopping with affiliate earnings.</p>
-      <a href="https://myntr.it/ZuHGAzq" target="_blank" class="btn">Shop Now</a>
-    </div>
+</div>
 
-    <div class="card">
-      <h3>AJIO</h3>
-      <p>Trending fashion deals.</p>
-      <a href="https://ajiio.in/b1l9hZ7" target="_blank" class="btn">Shop Now</a>
-    </div>
+<!-- SHOPPING -->
+<h2 class="section-title">🛒 Shopping & Lifestyle</h2>
+<div class="grid">
 
-    <div class="card">
-      <h3>Shopsy</h3>
-      <p>Budget shopping affiliate program.</p>
-      <a href="https://bitli.in/HtwsqQf" target="_blank" class="btn">Shop Now</a>
-    </div>
-  </div>
+<div class="card">
+<h3>Flipkart</h3>
+<p>Earn commission on every product sold.</p>
+<a href="https://fktr.in/JZCv94j" target="_blank" class="btn">Shop Now</a>
+</div>
 
-  <!-- PASSIVE INCOME -->
-  <h2 class="section-title" style="margin-top:40px;">💸 Passive Income (No Investment)</h2>
-  <div class="cards">
-    <div class="card">
-      <h3>Honeygain</h3>
-      <p>Earn money by sharing unused internet.</p>
-      <a href="https://join.honeygain.com/SHIVCBA03A" target="_blank" class="btn">Join Now</a>
-    </div>
+<div class="card">
+<h3>Myntra</h3>
+<p>Fashion affiliate earnings program.</p>
+<a href="https://myntr.it/ZuHGAzq" target="_blank" class="btn">Shop Now</a>
+</div>
 
-    <div class="card">
-      <h3>TimeBucks</h3>
-      <p>Surveys, tasks & daily earning.</p>
-      <a href="https://timebucks.com/?refID=219496823" target="_blank" class="btn">Start Earning</a>
-    </div>
+<div class="card">
+<h3>AJIO</h3>
+<p>Trending lifestyle deals affiliate.</p>
+<a href="https://ajiio.in/b1l9hZ7" target="_blank" class="btn">Shop Now</a>
+</div>
 
-    <div class="card">
-      <h3>Pawns / PixelPoint</h3>
-      <p>Earn from bandwidth & watching videos.</p>
-      <a href="https://discoverpawns.eu/1942855" target="_blank" class="btn">Join Now</a>
-    </div>
-  </div>
+<div class="card">
+<h3>Shopsy</h3>
+<p>Budget shopping affiliate program.</p>
+<a href="https://bitli.in/HtwsqQf" target="_blank" class="btn">Shop Now</a>
+</div>
 
-  <!-- HOW IT WORKS -->
-  <div class="footer-cta">
-    <h2>How Affiliate Marketing Works?</h2>
-    <p>
-      1️⃣ Choose an offer<br>
-      2️⃣ Share your affiliate link<br>
-      3️⃣ User completes action<br>
-      4️⃣ You earn real money 💰
-    </p>
-    <a href="dashboard.html" class="btn">Go to Dashboard</a>
-  </div>
+</div>
 
-  <!-- INTERNAL LINKING -->
-  <p style="margin-top:30px;font-size:14px;text-align:center;">
-    Related:
-    <a href="survey-tasks.html">Survey & Tasks</a> |
-    <a href="payment-proof.html">Payment Proof</a> |
-    <a href="work-from-home.html">Work From Home</a>
-  </p>
+<!-- PASSIVE -->
+<h2 class="section-title">💸 Passive Income</h2>
+<div class="grid">
+
+<div class="card">
+<h3>Honeygain</h3>
+<p>Earn money by sharing unused internet bandwidth.</p>
+<a href="https://join.honeygain.com/SHIVCBA03A" target="_blank" class="btn">Join Now</a>
+</div>
+
+<div class="card">
+<h3>TimeBucks</h3>
+<p>Surveys, tasks & daily earning opportunities.</p>
+<a href="https://timebucks.com/?refID=219496823" target="_blank" class="btn">Start</a>
+</div>
+
+<div class="card">
+<h3>Pawns App</h3>
+<p>Earn from watching ads & sharing internet.</p>
+<a href="https://discoverpawns.eu/1942855" target="_blank" class="btn">Join Now</a>
+</div>
+
+</div>
+
+<!-- TRUST -->
+<div class="trust">
+<h2>Why Choose Earn Paisa Today?</h2>
+<p>
+✔ Trusted Affiliate Programs<br>
+✔ High Paying Offers<br>
+✔ Genuine & Transparent System<br>
+✔ Weekly Payment Updates
+</p>
+</div>
+
+<!-- CTA -->
+<div class="cta">
+<h2>Start Earning Now 🚀</h2>
+<p>Join thousands of users earning online daily.</p>
+<br>
+<a href="dashboard.html" class="btn">Go to Dashboard</a>
+</div>
 
 </div>
 
 <footer>
-  © 2026 Earn Paisa Today • <a href="index.html">Home</a> • <a href="privacy-policy.html">Privacy Policy</a>
+© 2026 Earn Paisa Today • 
+<a href="privacy-policy.html">Privacy Policy</a> • 
+<a href="terms-conditions.html">Terms</a>
 </footer>
 
 </body>
-  </html>
+</html>
