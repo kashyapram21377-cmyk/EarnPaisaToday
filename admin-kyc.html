@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,110 +5,72 @@
 <title>Admin KYC Approval | Earn Paisa Today</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<meta name="description" content="Admin KYC verification panel for Earn Paisa Today. Review, approve or reject user KYC securely.">
-
-<!-- Firebase -->
+<!-- Firebase v9 Compat -->
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
 
 <style>
-/* ================== GLOBAL RESET ================== */
-*{ box-sizing:border-box; }
-
-/* ================== BODY ================== */
 body{
   margin:0;
   font-family:Segoe UI,Arial;
   background:#f4f6f8;
-  color:#222;
 }
-
-/* ================== NAVBAR ================== */
-nav{
-  background:#111;
-  color:#fff;
-  padding:12px 24px;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-}
-
-/* ================== HERO ================== */
 header{
   background:linear-gradient(135deg,#ff5722,#ff9800);
   color:#fff;
-  padding:80px 20px;
+  padding:20px;
   text-align:center;
 }
-
-/* ================== MAIN CONTAINER ================== */
 .container{
   max-width:1200px;
-  margin:60px auto;
-  padding:0 18px;
+  margin:40px auto;
+  padding:20px;
 }
-
-/* ================== SECTION TITLE ================== */
-.section-title{
-  font-size:30px;
-  margin:50px 0 22px;
-  border-left:6px solid #ff5722;
-  padding-left:12px;
-}
-
-/* ================== GRID ================== */
-.grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-  gap:24px;
-}
-
-/* ================== CARD ================== */
 .card{
   background:#fff;
-  border-radius:22px;
-  padding:26px;
-  box-shadow:0 10px 26px rgba(0,0,0,.08);
-  transition:.3s;
+  padding:20px;
+  border-radius:15px;
+  box-shadow:0 8px 20px rgba(0,0,0,.08);
 }
-.card:hover{ transform:translateY(-6px); }
-
-/* ================== STATS ================== */
-.stats{
-  background:#fff;
-  border-radius:22px;
-  padding:32px;
-  margin:70px 0;
-  box-shadow:0 10px 26px rgba(0,0,0,.07);
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
-  gap:20px;
-  text-align:center;
+table{
+  width:100%;
+  border-collapse:collapse;
 }
-
-/* ================== FOOTER ================== */
-footer{
-  background:#0f172a;
-  color:#cbd5e1;
-  padding:36px 20px;
-  margin-top:50px;
+th,td{
+  padding:10px;
+  border-bottom:1px solid #eee;
   font-size:14px;
-}
-.footer-grid{
-  max-width:1200px;
-  margin:auto;
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-  gap:28px;
-}
-.footer-bottom{
-  border-top:1px solid #1e293b;
-  margin-top:24px;
-  padding-top:14px;
   text-align:center;
-  font-size:13px;
-  color:#94a3b8;
+}
+th{
+  background:#111;
+  color:#fff;
+}
+button{
+  padding:6px 12px;
+  border:none;
+  border-radius:6px;
+  cursor:pointer;
+}
+.approve{background:#22c55e;color:#fff;}
+.reject{background:#ef4444;color:#fff;}
+.view{background:#3b82f6;color:#fff;}
+.badge{
+  padding:4px 8px;
+  border-radius:12px;
+  font-size:12px;
+  color:#fff;
+}
+.pending{background:#f59e0b;}
+.approved{background:#22c55e;}
+.rejected{background:#ef4444;}
+.logout{
+  position:absolute;
+  right:20px;
+  top:20px;
+  background:#111;
+  color:#fff;
 }
 </style>
 </head>
@@ -117,23 +78,21 @@ footer{
 <body>
 
 <header>
-  <h2>🪪 Admin KYC Approval Panel</h2>
-  <button onclick="logout()">Logout</button>
+  <h2>🪪 Admin KYC Panel</h2>
+  <button class="logout" onclick="logout()">Logout</button>
 </header>
 
 <div class="container">
-
   <div class="card">
-    <h3>Pending KYC Requests</h3>
-
+    <h3>All KYC Requests</h3>
     <table>
       <thead>
         <tr>
-          <th>User Email</th>
+          <th>Email</th>
           <th>Name</th>
           <th>Country</th>
           <th>ID Type</th>
-          <th>ID Number</th>
+          <th>ID No.</th>
           <th>Document</th>
           <th>Status</th>
           <th>Action</th>
@@ -144,95 +103,103 @@ footer{
       </tbody>
     </table>
   </div>
-
 </div>
 
 <script>
 /* FIREBASE CONFIG */
-const firebaseConfig={
-  apiKey:"AIzaSyBwd7y4uG955kZ5eg91ryn8bzbWzK2R_Ks",
-  authDomain:"earnpaisatoday.firebaseapp.com",
-  projectId:"earnpaisatoday"
+const firebaseConfig = {
+  apiKey: "AIzaSyBwd7y4uG955kZ5eg91ryn8bzbWzK2R_Ks",
+  authDomain: "earnpaisatoday.firebaseapp.com",
+  projectId: "earnpaisatoday",
+  storageBucket: "earnpaisatoday.firebasestorage.app",
+  messagingSenderId: "473043945290",
+  appId: "1:473043945290:web:310c59ae189b219060a3b3"
 };
+
 firebase.initializeApp(firebaseConfig);
 
-const auth=firebase.auth();
-const db=firebase.firestore();
-const ADMIN_EMAIL="kashyapram21377@gmail.com";
+const auth = firebase.auth();
+const db = firebase.firestore();
 
-/* AUTH CHECK */
-auth.onAuthStateChanged(user=>{
-  if(!user || user.email!==ADMIN_EMAIL){
+/* ADMIN ROLE CHECK */
+auth.onAuthStateChanged(async user=>{
+  if(!user){
+    location.href="login.html";
+    return;
+  }
+
+  const doc = await db.collection("users").doc(user.uid).get();
+  if(!doc.exists || doc.data().role !== "admin"){
     alert("Admin access only");
     auth.signOut();
     location.href="login.html";
     return;
   }
+
   loadKYC();
 });
 
-/* LOAD KYC */
+/* LOAD KYC DATA */
 function loadKYC(){
-  const box=document.getElementById("kycList");
-  box.innerHTML="";
+  const box = document.getElementById("kycList");
 
-  db.collection("users")
-    .where("kyc.status","in",["pending","approved","rejected"])
-    .onSnapshot(snap=>{
-      box.innerHTML="";
-      if(snap.empty){
-        box.innerHTML="<tr><td colspan='8'>No KYC requests</td></tr>";
-        return;
-      }
+  db.collection("users").onSnapshot(snapshot=>{
+    box.innerHTML="";
 
-      snap.forEach(doc=>{
-        const u=doc.data();
-        if(!u.kyc) return;
+    if(snapshot.empty){
+      box.innerHTML="<tr><td colspan='8'>No KYC Data</td></tr>";
+      return;
+    }
 
-        box.innerHTML+=`
-        <tr>
-          <td>${u.email||"-"}</td>
-          <td>${u.kyc.name}</td>
-          <td>${u.kyc.country}</td>
-          <td>${u.kyc.type}</td>
-          <td>${u.kyc.number}</td>
-          <td>
-            <a href="${u.kyc.file}" target="_blank">
-              <button class="btn view">View</button>
-            </a>
-          </td>
-          <td>
-            <span class="badge ${u.kyc.status}">
-              ${u.kyc.status}
-            </span>
-          </td>
-          <td>
-            ${u.kyc.status==="pending"?`
-              <button class="btn approve"
-                onclick="updateKYC('${doc.id}','approved')">Approve</button>
-              <button class="btn reject"
-                onclick="updateKYC('${doc.id}','rejected')">Reject</button>
-            `:"-"}
-          </td>
-        </tr>
-        `;
-      });
+    snapshot.forEach(doc=>{
+      const u = doc.data();
+      if(!u.kyc) return;
+
+      box.innerHTML += `
+      <tr>
+        <td>${u.email || "-"}</td>
+        <td>${u.kyc.name || "-"}</td>
+        <td>${u.kyc.country || "-"}</td>
+        <td>${u.kyc.type || "-"}</td>
+        <td>${u.kyc.number || "-"}</td>
+        <td>
+          ${u.kyc.file ? 
+          `<a href="${u.kyc.file}" target="_blank">
+            <button class="view">View</button>
+          </a>` : "-"}
+        </td>
+        <td>
+          <span class="badge ${u.kyc.status}">
+            ${u.kyc.status}
+          </span>
+        </td>
+        <td>
+          ${u.kyc.status==="pending" ? `
+            <button class="approve" onclick="updateKYC('${doc.id}','approved')">Approve</button>
+            <button class="reject" onclick="updateKYC('${doc.id}','rejected')">Reject</button>
+          ` : "-"}
+        </td>
+      </tr>
+      `;
     });
+  });
 }
 
-/* UPDATE KYC */
+/* UPDATE STATUS */
 function updateKYC(uid,status){
   if(!confirm("Confirm "+status+" KYC?")) return;
 
   db.collection("users").doc(uid).update({
-    "kyc.status":status,
-    "kyc.reviewedAt":new Date()
+    "kyc.status": status,
+    "kyc.reviewedAt": new Date()
   });
 }
 
 /* LOGOUT */
 function logout(){
-  auth.signOut().then(()=>location.href="index.html");
+  auth.signOut().then(()=>{
+    location.href="index.html";
+  });
 }
 </script>
 
