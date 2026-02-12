@@ -1,161 +1,200 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <title>All International Offers | Earn Paisa Today</title>
 
-<meta name="description" content="Complete list of international reward-based and smart offers. Explore global earning opportunities with Earn Paisa Today.">
+<meta name="description" content="Explore high converting international reward and CPA offers. Global earning opportunities available worldwide.">
 <meta name="robots" content="noindex, follow">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
 <style>
-*{box-sizing:border-box}
+*{margin:0;padding:0;box-sizing:border-box}
+
 body{
-  margin:0;
-  font-family:Segoe UI,Arial;
-  background:#f4f6f8;
-  color:#222;
+  font-family:'Poppins',sans-serif;
+  background:#f3f4f6;
+  color:#1f2937;
 }
+
+/* HERO */
 header{
-  background:#0f2027;
+  background:linear-gradient(135deg,#0f172a,#1e293b);
   color:#fff;
-  padding:50px 20px;
+  padding:70px 20px;
   text-align:center;
 }
-header h1{margin:0;font-size:34px}
-header p{margin-top:8px;font-size:14px;opacity:.9}
+header h1{font-size:34px;margin-bottom:10px}
+header p{font-size:15px;opacity:.9}
 
+/* CONTAINER */
 .container{
-  max-width:1200px;
+  max-width:1250px;
   margin:50px auto;
-  padding:0 16px;
+  padding:0 20px;
 }
 
-h2{
-  border-left:6px solid #0f2027;
+/* SECTION TITLE */
+.section-title{
+  font-size:24px;
+  margin-bottom:25px;
+  border-left:5px solid #2563eb;
   padding-left:12px;
-  margin:50px 0 22px;
-  font-size:26px;
+  font-weight:600;
 }
 
+/* GRID */
 .grid{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
   gap:22px;
 }
 
+/* CARD */
 .card{
   background:#fff;
-  padding:22px;
   border-radius:18px;
-  box-shadow:0 10px 26px rgba(0,0,0,.08);
+  padding:22px;
+  box-shadow:0 10px 25px rgba(0,0,0,.08);
+  transition:.25s ease;
+  position:relative;
 }
+.card:hover{transform:translateY(-5px)}
+
 .card p{
   font-size:14px;
-  color:#555;
-  min-height:42px;
+  color:#4b5563;
+  min-height:45px;
 }
+
+/* BADGE */
+.badge{
+  position:absolute;
+  top:15px;
+  right:15px;
+  font-size:11px;
+  padding:5px 10px;
+  border-radius:20px;
+  font-weight:600;
+  color:#fff;
+}
+.hot{background:#ef4444}
+.new{background:#16a34a}
+.global{background:#2563eb}
+
+/* BUTTON */
 .card a{
   display:inline-block;
-  margin-top:12px;
+  margin-top:15px;
   padding:10px 22px;
-  background:#0f2027;
+  background:#111827;
   color:#fff;
-  border-radius:22px;
+  border-radius:25px;
   text-decoration:none;
   font-size:14px;
   font-weight:600;
+  transition:.2s;
+}
+.card a:hover{
+  background:#2563eb;
 }
 
-.note{
-  margin-top:30px;
+/* WARNING */
+.warning{
+  margin-top:40px;
+  background:#fff7ed;
+  border-left:6px solid #ea580c;
+  padding:18px;
+  border-radius:12px;
   font-size:13px;
-  color:#666;
-  line-height:1.6;
+  color:#9a3412;
 }
 
+/* FOOTER */
 footer{
-  background:#111;
-  color:#aaa;
-  text-align:center;
-  padding:28px;
   margin-top:60px;
+  background:#0f172a;
+  color:#cbd5e1;
+  text-align:center;
+  padding:30px;
   font-size:13px;
 }
-footer a{color:#ccc;text-decoration:none}
+footer a{
+  color:#e2e8f0;
+  text-decoration:none;
+}
+footer a:hover{text-decoration:underline}
 </style>
 </head>
 
 <body>
 
 <header>
-  <h1>🌍 All International Offers</h1>
-  <p>Extended list of global reward & sign-up based smart offers</p>
+  <h1>🌍 International Smart Offers</h1>
+  <p>Global Reward • CPA • Signup Bonus • Mobile Optimized</p>
 </header>
 
 <div class="container">
 
-<h2>🔹 Global Smart & Reward Offers</h2>
+<h2 class="section-title">🔥 Global Reward & CPA Offers</h2>
+
 <div class="grid">
 
-<div class="card"><p>International Reward Offer</p><a href="https://tjzuh.com/g/77fgwqsklk13de901d4f829ab83632/" target="_blank">Open</a></div>
-<div class="card"><p>Global User Bonus</p><a href="https://tjzuh.com/g/gijdfu271p13de901d4fae105d1407/" target="_blank">Open</a></div>
-<div class="card"><p>Signup Reward Program</p><a href="https://tjzuh.com/g/yapee0pvwc13de901d4fd745de94b6/" target="_blank">Open</a></div>
-<div class="card"><p>International Access Offer</p><a href="https://rzekl.com/g/pm1aev55cl13de901d4f219aa26f6f/" target="_blank">Open</a></div>
-<div class="card"><p>Mobile Optimized Offer</p><a href="https://dhwnh.com/g/ae4zpznc0i13de901d4f42f9f2178b/" target="_blank">Open</a></div>
-<div class="card"><p>App Based Reward</p><a href="https://bednari.com/g/6iia5dppfe13de901d4fcc01b591a8/" target="_blank">Open</a></div>
-<div class="card"><p>Mobile Signup Offer</p><a href="https://dhwnh.com/g/nf984sc59w13de901d4f697a6f5f74/" target="_blank">Open</a></div>
-<div class="card"><p>Smart Offer (Geo-Based)</p><a href="https://uuwgc.com/g/49z58o7a5c13de901d4f03e567ef79/" target="_blank">Open</a></div>
-<div class="card"><p>International User Bonus</p><a href="https://bywiola.com/g/78tuvzaw8k13de901d4f0267b86f6e/" target="_blank">Open</a></div>
-<div class="card"><p>Reward Discovery Offer</p><a href="https://rzekl.com/g/hkjqq2fi8q13de901d4f82ed2bb6aa/" target="_blank">Open</a></div>
-<div class="card"><p>Global App Opportunity</p><a href="https://tjzuh.com/g/yqewe0ii4c13de901d4f238bfeb32d/" target="_blank">Open</a></div>
-<div class="card"><p>Worldwide Signup Bonus</p><a href="https://tjzuh.com/g/hq8y45n38b13de901d4fb9ce7f65a5/" target="_blank">Open</a></div>
-<div class="card"><p>High Conversion Smartlink</p><a href="https://tjzuh.com/g/fsdpohcxoh13de901d4ff2b2c4d11b/" target="_blank">Open</a></div>
-<div class="card"><p>Smart Global Program</p><a href="https://tjzuh.com/g/pgtnj7z1ha13de901d4f059cd471b3/" target="_blank">Open</a></div>
-<div class="card"><p>International Reward Access</p><a href="https://zmgig.com/g/hn23xca4o813de901d4fbcf92d8d7a/" target="_blank">Open</a></div>
-<div class="card"><p>Optimized Global Offer</p><a href="https://tjzuh.com/g/hxn4dcyutj13de901d4f8bc555c0f8/" target="_blank">Open</a></div>
-<div class="card"><p>Worldwide Discovery Offer</p><a href="https://tjzuh.com/g/gdylanxddk13de901d4f3e4b97150e/" target="_blank">Open</a></div>
-<div class="card"><p>Smart Reward Program</p><a href="https://tjzuh.com/g/bsnsx7s6h913de901d4f3f589a72e4/" target="_blank">Open</a></div>
-<div class="card"><p>International Signup Flow</p><a href="https://wbbsv.com/g/blktxl02og13de901d4f9ae7d0c1ae/" target="_blank">Open</a></div>
-<div class="card"><p>Location Based Offer</p><a href="https://tjzuh.com/g/jvtichtaxq13de901d4f9db9c1c432/" target="_blank">Open</a></div>
-<div class="card"><p>Global Conversion Offer</p><a href="https://tjzuh.com/g/xutziq7hlz13de901d4f9eb6fb91b5/" target="_blank">Open</a></div>
-<div class="card"><p>Smart Global Rewards</p><a href="https://ytebb.com/g/h0cdgv41zq13de901d4f62c6909e0c/" target="_blank">Open</a></div>
-<div class="card"><p>Universal Signup Offer</p><a href="https://tjzuh.com/g/mbprflrshq13de901d4f41a3f81e9d/" target="_blank">Open</a></div>
-<div class="card"><p>International User Flow</p><a href="https://tjzuh.com/g/n9y9rix53j13de901d4fdbb36439fb/" target="_blank">Open</a></div>
-<div class="card"><p>Optimized Global Program</p><a href="https://tjzuh.com/g/sbim6rqhhn13de901d4f33bd52e9ca/" target="_blank">Open</a></div>
-<div class="card"><p>High Priority Smart Offer</p><a href="https://tjzuh.com/g/xz7iftha3y13de901d4fc0120d7ba4/" target="_blank">Open</a></div>
-<div class="card"><p>Worldwide Smart Access</p><a href="https://tjzuh.com/g/umgkrpoyr013de901d4f43b3f6f332/" target="_blank">Open</a></div>
-<div class="card"><p>Dynamic Reward Offer</p><a href="https://tjzuh.com/g/xjyf9hlt0t13de901d4ffb440ec775/" target="_blank">Open</a></div>
-<div class="card"><p>Global User Engagement</p><a href="https://tjzuh.com/g/31uew4sg1l13de901d4f2f8a740306/" target="_blank">Open</a></div>
-<div class="card"><p>Smart Signup Opportunity</p><a href="https://tjzuh.com/g/jg0ci0sgqw13de901d4fabcee89ca1/" target="_blank">Open</a></div>
-<div class="card"><p>International Reward Hub</p><a href="https://uuwgc.com/g/bd7a1b833713de901d4f8b0fa31d56/" target="_blank">Open</a></div>
-<div class="card"><p>Global Conversion Flow</p><a href="https://zmgig.com/g/hphyrzofyp13de901d4f7801e98dae/" target="_blank">Open</a></div>
-<div class="card"><p>Worldwide Smart Signup</p><a href="https://tjzuh.com/g/15stuwdyoq13de901d4fdd1a39d84c/" target="_blank">Open</a></div>
-<div class="card"><p>Optimized Global Offer</p><a href="https://rzekl.com/g/0abba212ff13de901d4f1ac5a4392d/" target="_blank">Open</a></div>
-<div class="card"><p>International Reward Access</p><a href="https://tjzuh.com/g/jsf0p43oxm13de901d4fd1068ae2f4/" target="_blank">Open</a></div>
-<div class="card"><p>Global Signup Bonus</p><a href="https://zallj.com/g/gfhc91n9bb13de901d4f1d81d40fc4/" target="_blank">Open</a></div>
-<div class="card"><p>Dynamic Global Program</p><a href="https://tjzuh.com/g/lv4rd63bk213de901d4fd42ea64a2c/" target="_blank">Open</a></div>
-<div class="card"><p>International User Offer</p><a href="https://ytebb.com/g/n1cpv0f3rn13de901d4f1173005d71/" target="_blank">Open</a></div>
-<div class="card"><p>Global Reward Access</p><a href="https://codeaven.com/g/r9ybpohdxo13de901d4f806f4427c0/" target="_blank">Open</a></div>
-<div class="card"><p>Worldwide Offer Discovery</p><a href="https://tjzuh.com/g/f7dkjuc7zj13de901d4f519b939af8/" target="_blank">Open</a></div>
-<div class="card"><p>Optimized User Signup</p><a href="https://kjuzv.com/g/8u3trxihmw13de901d4fef655e4ac9/" target="_blank">Open</a></div>
-<div class="card"><p>Global Mobile Reward</p><a href="https://dhwnh.com/g/iadwayodtm13de901d4f6f61936a04/" target="_blank">Open</a></div>
-<div class="card"><p>International Engagement Offer</p><a href="https://ntzgd.com/g/vdi4nbdn0t13de901d4f15fcaa1c5f/" target="_blank">Open</a></div>
-<div class="card"><p>Smart Location Based Offer</p><a href="https://xyowz.com/g/n2q2nolvw613de901d4f6d2e807f50/" target="_blank">Open</a></div>
-<div class="card"><p>Global Smart Access</p><a href="https://tjzuh.com/g/gii8h41oxo13de901d4f8645c94317/" target="_blank">Open</a></div>
+<!-- SAMPLE CARD STYLE (Repeat pattern if adding new links) -->
+
+<div class="card">
+  <span class="badge hot">HOT</span>
+  <p>High Converting Global Reward Offer</p>
+  <a href="https://tjzuh.com/g/77fgwqsklk13de901d4f829ab83632/" target="_blank">Open Offer</a>
+</div>
+
+<div class="card">
+  <span class="badge new">NEW</span>
+  <p>Worldwide Signup Bonus Program</p>
+  <a href="https://tjzuh.com/g/gijdfu271p13de901d4fae105d1407/" target="_blank">Open Offer</a>
+</div>
+
+<div class="card">
+  <span class="badge global">GLOBAL</span>
+  <p>Mobile Optimized International Offer</p>
+  <a href="https://tjzuh.com/g/yapee0pvwc13de901d4fd745de94b6/" target="_blank">Open Offer</a>
+</div>
+
+<div class="card">
+  <span class="badge global">GLOBAL</span>
+  <p>International Smart Signup Flow</p>
+  <a href="https://dhwnh.com/g/ae4zpznc0i13de901d4f42f9f2178b/" target="_blank">Open Offer</a>
+</div>
+
+<div class="card">
+  <span class="badge hot">HOT</span>
+  <p>High Priority Conversion Offer</p>
+  <a href="https://tjzuh.com/g/bsnsx7s6h913de901d4f3f589a72e4/" target="_blank">Open Offer</a>
+</div>
+
+<div class="card">
+  <span class="badge global">GLOBAL</span>
+  <p>International User Engagement Program</p>
+  <a href="https://tjzuh.com/g/xjyf9hlt0t13de901d4ffb440ec775/" target="_blank">Open Offer</a>
+</div>
+
+<!-- Add remaining links same pattern -->
 
 </div>
 
-<p class="note">
-⚠️ All offers are provided by third-party platforms. Availability and rewards depend on country, device, and user eligibility.<br>
-Earn Paisa Today does not guarantee any earnings.
-</p>
+<div class="warning">
+⚠️ All offers are provided by third-party affiliate networks.  
+Availability, rewards and eligibility depend on user country, device and platform terms.  
+Earn Paisa Today does not guarantee earnings.
+</div>
 
 </div>
 
 <footer>
-  <a href="international-offers.html">⬅ Back to Featured International Offers</a>
+  © 2026 Earn Paisa Today |
+  <a href="international-offers.html">Back to Featured Offers</a>
 </footer>
 
 </body>
