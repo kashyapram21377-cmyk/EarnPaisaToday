@@ -5,193 +5,285 @@
 <title>Contact Us | Earn Paisa Today</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<meta name="description" content="Contact Earn Paisa Today for support, partnership, or general inquiries. We are here to help users worldwide.">
+<meta name="description" content="Contact Earn Paisa Today for support, partnerships or general inquiries. 24/7 worldwide support available.">
 <meta name="robots" content="index, follow">
 
-<style>
-/* ================== GLOBAL RESET ================== */
-*{ box-sizing:border-box; }
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 
-/* ================== BODY ================== */
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+
 body{
-  margin:0;
-  font-family:Segoe UI,Arial;
+  font-family:'Poppins',sans-serif;
   background:#f4f6f8;
   color:#222;
 }
 
-/* ================== NAVBAR ================== */
+/* NAVBAR */
 nav{
   background:#111;
   color:#fff;
-  padding:12px 24px;
+  padding:15px 25px;
   display:flex;
   justify-content:space-between;
   align-items:center;
+  position:sticky;
+  top:0;
+  z-index:1000;
+}
+nav a{
+  color:#fff;
+  text-decoration:none;
+  margin-left:20px;
+  font-size:14px;
 }
 
-/* ================== HERO ================== */
+/* HERO */
 header{
   background:linear-gradient(135deg,#ff5722,#ff9800);
   color:#fff;
-  padding:80px 20px;
   text-align:center;
+  padding:90px 20px;
 }
+header h1{font-size:36px;margin-bottom:10px}
+header p{opacity:.9}
 
-/* ================== MAIN CONTAINER ================== */
+/* CONTAINER */
 .container{
   max-width:1200px;
   margin:60px auto;
-  padding:0 18px;
+  padding:0 20px;
 }
 
-/* ================== SECTION TITLE ================== */
-.section-title{
-  font-size:30px;
-  margin:50px 0 22px;
-  border-left:6px solid #ff5722;
-  padding-left:12px;
-}
-
-/* ================== GRID ================== */
+/* GRID */
 .grid{
   display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-  gap:24px;
+  grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+  gap:30px;
 }
 
-/* ================== CARD ================== */
+/* CARD */
 .card{
   background:#fff;
-  border-radius:22px;
-  padding:26px;
-  box-shadow:0 10px 26px rgba(0,0,0,.08);
+  border-radius:20px;
+  padding:30px;
+  box-shadow:0 10px 30px rgba(0,0,0,.08);
   transition:.3s;
 }
-.card:hover{ transform:translateY(-6px); }
-
-/* ================== STATS ================== */
-.stats{
-  background:#fff;
-  border-radius:22px;
-  padding:32px;
-  margin:70px 0;
-  box-shadow:0 10px 26px rgba(0,0,0,.07);
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
-  gap:20px;
-  text-align:center;
+.card:hover{
+  transform:translateY(-6px);
+  box-shadow:0 15px 40px rgba(0,0,0,.12);
 }
 
-/* ================== FOOTER ================== */
-footer{
-  background:#0f172a;
-  color:#cbd5e1;
-  padding:36px 20px;
-  margin-top:50px;
+.card h2{margin-bottom:15px}
+.card p{color:#555;font-size:14px;margin-bottom:15px}
+
+/* CONTACT INFO */
+.info-list{
+  list-style:none;
+}
+.info-list li{
+  margin-bottom:10px;
   font-size:14px;
 }
-.footer-grid{
-  max-width:1200px;
-  margin:auto;
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-  gap:28px;
+
+/* BADGE */
+.badge{
+  display:inline-block;
+  margin-top:10px;
+  background:#16a34a;
+  color:#fff;
+  padding:6px 12px;
+  font-size:12px;
+  border-radius:20px;
 }
-.footer-bottom{
-  border-top:1px solid #1e293b;
-  margin-top:24px;
-  padding-top:14px;
-  text-align:center;
+
+/* FORM */
+form input,
+form select,
+form textarea{
+  width:100%;
+  padding:12px;
+  margin:8px 0;
+  border-radius:10px;
+  border:1px solid #ddd;
+  font-family:'Poppins',sans-serif;
+}
+
+form textarea{
+  min-height:120px;
+  resize:none;
+}
+
+form button{
+  width:100%;
+  padding:12px;
+  background:#ff5722;
+  border:none;
+  color:#fff;
+  font-weight:600;
+  border-radius:30px;
+  cursor:pointer;
+  transition:.3s;
+}
+form button:hover{
+  background:#e64a19;
+}
+
+/* NOTE */
+.note{
+  margin-top:12px;
+  font-size:12px;
+  color:#888;
+}
+
+/* TRUST SECTION */
+.trust{
+  margin-top:40px;
+  background:#fff;
+  padding:35px;
+  border-radius:20px;
+  box-shadow:0 10px 30px rgba(0,0,0,.06);
+}
+.trust h2{margin-bottom:10px}
+.trust p{font-size:14px;color:#555}
+
+/* LINKS */
+.links a{
+  display:inline-block;
+  margin:5px 10px 0 0;
   font-size:13px;
-  color:#94a3b8;
+  color:#ff5722;
+  text-decoration:none;
+}
+
+/* FOOTER */
+footer{
+  margin-top:70px;
+  background:#0f172a;
+  color:#cbd5e1;
+  text-align:center;
+  padding:30px;
+  font-size:14px;
+}
+footer a{
+  color:#ff9800;
+  text-decoration:none;
+}
+
+/* SUCCESS POPUP */
+.popup{
+  position:fixed;
+  top:20px;
+  right:20px;
+  background:#16a34a;
+  color:#fff;
+  padding:12px 20px;
+  border-radius:30px;
+  box-shadow:0 10px 25px rgba(0,0,0,.2);
+  display:none;
 }
 </style>
 </head>
 
 <body>
 
+<nav>
+  <div><b>Earn Paisa Today</b></div>
+  <div>
+    <a href="index.html">Home</a>
+    <a href="dashboard.html">Dashboard</a>
+    <a href="affiliate-marketing.html">Affiliate</a>
+  </div>
+</nav>
+
 <header>
   <h1>Contact Us</h1>
-  <p>We are here to help – worldwide support</p>
+  <p>We are here to help – 24/7 Worldwide Support 🌍</p>
 </header>
 
 <div class="container">
 
-  <div class="grid">
+<div class="grid">
 
-    <!-- CONTACT INFO -->
-    <div class="card">
-      <h2>📞 Contact Information</h2>
-      <p>
-        If you have any questions, feedback, or partnership inquiries,
-        feel free to reach out to us.
-      </p>
-      <ul>
-        <li><strong>Email:</strong> support@earnpaisatoday.com</li>
-        <li><strong>Business:</strong> partners@earnpaisatoday.com</li>
-        <li><strong>Support Hours:</strong> 24/7 (Online)</li>
-        <li><strong>Service Area:</strong> Worldwide</li>
-      </ul>
-      <span class="badge">Response within 24–48 hours</span>
-    </div>
+<!-- CONTACT INFO -->
+<div class="card">
+<h2>📞 Contact Information</h2>
+<p>Reach out to us for support, partnership or general inquiries.</p>
 
-    <!-- CONTACT FORM -->
-    <div class="card">
-      <h2>✉️ Send Us a Message</h2>
+<ul class="info-list">
+<li><strong>Email:</strong> support@earnpaisatoday.com</li>
+<li><strong>Business:</strong> partners@earnpaisatoday.com</li>
+<li><strong>Support Hours:</strong> 24/7 Online</li>
+<li><strong>Service Area:</strong> Worldwide</li>
+</ul>
 
-      <form onsubmit="sendMsg(event)">
-        <input type="text" id="name" placeholder="Your Name" required>
-        <input type="email" id="email" placeholder="Your Email" required>
+<span class="badge">Response within 24–48 hours</span>
+</div>
 
-        <select id="subject" required>
-          <option value="">Select Subject</option>
-          <option>Account Support</option>
-          <option>Payment / Withdrawal</option>
-          <option>Affiliate / Partnership</option>
-          <option>Technical Issue</option>
-          <option>General Inquiry</option>
-        </select>
+<!-- CONTACT FORM -->
+<div class="card">
+<h2>✉️ Send Us a Message</h2>
 
-        <textarea id="message" placeholder="Write your message here..." required></textarea>
+<form onsubmit="sendMsg(event)">
+<input type="text" placeholder="Your Name" required>
+<input type="email" placeholder="Your Email" required>
 
-        <button type="submit">Submit Message</button>
-      </form>
+<select required>
+<option value="">Select Subject</option>
+<option>Account Support</option>
+<option>Payment / Withdrawal</option>
+<option>Affiliate / Partnership</option>
+<option>Technical Issue</option>
+<option>General Inquiry</option>
+</select>
 
-      <p class="note">
-        ⚠️ Do not share passwords, OTPs, or sensitive personal information.
-      </p>
-    </div>
+<textarea placeholder="Write your message here..." required></textarea>
 
-  </div>
+<button type="submit">Submit Message</button>
+</form>
 
-  <!-- ADDITIONAL INFO -->
-  <div class="card" style="margin-top:28px">
-    <h2>🌐 Important Information</h2>
-    <p>
-      Earn Paisa Today is an informational and earning-support platform.
-      We do not guarantee earnings and do not provide financial or investment advice.
-    </p>
-    <div class="links">
-      <a href="privacy-policy.html">Privacy Policy</a>
-      <a href="terms-conditions.html">Terms & Conditions</a>
-      <a href="disclaimer.html">Disclaimer</a>
-      <a href="platform-approval.html">Platform Approval</a>
-    </div>
-  </div>
+<p class="note">
+⚠️ Never share passwords, OTPs or sensitive information.
+</p>
+
+</div>
+
+</div>
+
+<!-- TRUST -->
+<div class="trust">
+<h2>🌐 Important Information</h2>
+<p>
+Earn Paisa Today is an earning-support platform. We do not guarantee earnings
+and do not provide financial or investment advice.
+</p>
+
+<div class="links">
+<a href="privacy-policy.html">Privacy Policy</a>
+<a href="terms-conditions.html">Terms</a>
+<a href="disclaimer.html">Disclaimer</a>
+<a href="platform-approval.html">Platform Approval</a>
+</div>
+</div>
 
 </div>
 
 <footer>
-  © 2026 Earn Paisa Today |
-  <a href="index.html">Home</a> |
-  <a href="contact-us.html">Contact Us</a>
+© 2026 Earn Paisa Today • 
+<a href="index.html">Home</a> • 
+<a href="contact-us.html">Contact</a>
 </footer>
+
+<div class="popup" id="popup">Message Sent Successfully ✅</div>
 
 <script>
 function sendMsg(e){
   e.preventDefault();
-  alert("Thank you! Your message has been submitted. We will contact you soon.");
+  document.getElementById("popup").style.display="block";
+  setTimeout(()=>{
+    document.getElementById("popup").style.display="none";
+  },3000);
   e.target.reset();
 }
 </script>
