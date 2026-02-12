@@ -5,43 +5,57 @@
 <title>Share & Earn | Earn Paisa Today</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<meta name="description" content="Share Earn Paisa Today with friends and earn referral rewards. Multiple international sharing options available.">
+<meta name="description" content="Invite friends & earn referral rewards. Global sharing system with tracking enabled.">
 
-<!-- Firebase -->
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
 
 <style>
-*{box-sizing:border-box}
+*{margin:0;padding:0;box-sizing:border-box}
+
 body{
-  margin:0;
-  font-family:Segoe UI,Arial;
-  background:#f4f6f8;
-  color:#222;
+  font-family:'Segoe UI',Arial;
+  background:#f3f4f6;
+  color:#1f2937;
 }
+
+/* HEADER */
 header{
-  background:linear-gradient(135deg,#ff6a00,#ff9800);
+  background:#0f172a;
   color:#fff;
-  padding:28px 20px;
-  text-align:center;
+  padding:20px 24px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
 }
-header h1{margin:0;font-size:26px}
-header p{margin-top:6px;font-size:14px}
+header h2{font-size:18px}
+header a{
+  color:#fff;
+  text-decoration:none;
+  font-size:14px;
+}
 
+/* CONTAINER */
 .container{
-  max-width:900px;
-  margin:28px auto;
-  padding:0 16px;
+  max-width:1000px;
+  margin:40px auto;
+  padding:0 20px;
 }
 
+/* CARD */
 .card{
   background:#fff;
-  border-radius:18px;
-  padding:24px;
-  box-shadow:0 10px 26px rgba(0,0,0,.08);
-  margin-bottom:24px;
+  border-radius:20px;
+  padding:26px;
+  box-shadow:0 12px 30px rgba(0,0,0,.08);
+  margin-bottom:26px;
+}
+.card h3{
+  margin-bottom:16px;
 }
 
+/* REF BOX */
 .ref-box{
   display:flex;
   gap:10px;
@@ -50,116 +64,136 @@ header p{margin-top:6px;font-size:14px}
 .ref-box input{
   flex:1;
   padding:12px;
-  border-radius:10px;
-  border:1px solid #ddd;
-  font-size:14px;
+  border-radius:12px;
+  border:1px solid #d1d5db;
 }
 .ref-box button{
-  padding:12px 20px;
+  padding:12px 18px;
   border:none;
-  border-radius:10px;
-  background:#ff6a00;
+  border-radius:12px;
+  background:#2563eb;
   color:#fff;
   font-weight:600;
   cursor:pointer;
 }
 
+/* SHARE GRID */
 .grid{
   display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(140px,1fr));
+  grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
   gap:16px;
 }
 
 .share-btn{
-  background:#f7f7f7;
-  border-radius:14px;
-  padding:18px 10px;
+  padding:18px;
+  border-radius:16px;
   text-align:center;
-  cursor:pointer;
-  transition:.3s;
-  font-size:14px;
   font-weight:600;
+  cursor:pointer;
+  transition:.25s;
 }
 .share-btn:hover{
   transform:translateY(-4px);
   box-shadow:0 8px 20px rgba(0,0,0,.12);
 }
 
-.whatsapp{background:#e7f7ef;color:#128c7e}
+.whatsapp{background:#e6f7ef;color:#128c7e}
 .telegram{background:#e8f2ff;color:#0088cc}
 .facebook{background:#e7f0ff;color:#1877f2}
 .twitter{background:#eef6ff;color:#1da1f2}
 .linkedin{background:#e6f4ff;color:#0a66c2}
-.reddit{background:#fff0e6;color:#ff4500}
-.email{background:#f3e8ff;color:#7b1fa2}
-.sms{background:#fffde7;color:#827717}
 .copy{background:#e0f2f1;color:#00695c}
 .qr{background:#fce4ec;color:#ad1457}
+.native{background:#ede9fe;color:#6d28d9}
 
-.note{
+/* STATUS */
+.status{
   font-size:13px;
-  color:#555;
+  margin-top:10px;
+  color:#16a34a;
+}
+
+/* INFO */
+.info{
+  background:#eff6ff;
+  padding:14px;
+  border-radius:12px;
+  font-size:13px;
   line-height:1.6;
 }
 
+/* QR MODAL */
+#qrModal{
+  display:none;
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.5);
+  align-items:center;
+  justify-content:center;
+}
+#qrModal div{
+  background:#fff;
+  padding:20px;
+  border-radius:20px;
+  text-align:center;
+}
+#qrModal img{
+  width:200px;
+}
+
+/* FOOTER */
 footer{
   margin-top:40px;
   text-align:center;
   font-size:13px;
-  color:#777;
+  color:#6b7280;
 }
-footer a{color:#ff6a00;text-decoration:none}
+footer a{color:#2563eb;text-decoration:none}
 </style>
 </head>
 
 <body>
 
 <header>
-  <h1>🔗 Share & Earn</h1>
-  <p>Invite friends • Earn rewards • Unlimited sharing</p>
+  <h2>🔗 Share & Earn</h2>
+  <a href="dashboard.html">← Back</a>
 </header>
 
 <div class="container">
 
-  <!-- REFERRAL LINK -->
-  <div class="card">
-    <h3>Your Referral Link</h3>
-    <div class="ref-box">
-      <input id="refLink" readonly value="Loading...">
-      <button onclick="copyLink()">Copy</button>
-    </div>
-    <p class="note">Share this link. When users join using your link, you earn referral rewards.</p>
+<!-- REF LINK -->
+<div class="card">
+  <h3>Your Referral Link</h3>
+  <div class="ref-box">
+    <input id="refLink" readonly>
+    <button onclick="copyLink()">Copy</button>
   </div>
+  <div class="status" id="copyStatus"></div>
+</div>
 
-  <!-- SHARE BUTTONS -->
-  <div class="card">
-    <h3>Share On</h3>
-    <div class="grid">
+<!-- SHARE OPTIONS -->
+<div class="card">
+  <h3>Share On</h3>
+  <div class="grid">
 
-      <div class="share-btn whatsapp" onclick="share('whatsapp')">WhatsApp</div>
-      <div class="share-btn telegram" onclick="share('telegram')">Telegram</div>
-      <div class="share-btn facebook" onclick="share('facebook')">Facebook</div>
-      <div class="share-btn twitter" onclick="share('twitter')">X / Twitter</div>
-      <div class="share-btn linkedin" onclick="share('linkedin')">LinkedIn</div>
-      <div class="share-btn reddit" onclick="share('reddit')">Reddit</div>
-      <div class="share-btn email" onclick="share('email')">Email</div>
-      <div class="share-btn sms" onclick="share('sms')">SMS</div>
-      <div class="share-btn copy" onclick="copyLink()">Copy Link</div>
-      <div class="share-btn qr" onclick="showQR()">QR Code</div>
+    <div class="share-btn whatsapp" onclick="share('whatsapp')">WhatsApp</div>
+    <div class="share-btn telegram" onclick="share('telegram')">Telegram</div>
+    <div class="share-btn facebook" onclick="share('facebook')">Facebook</div>
+    <div class="share-btn twitter" onclick="share('twitter')">X / Twitter</div>
+    <div class="share-btn linkedin" onclick="share('linkedin')">LinkedIn</div>
+    <div class="share-btn copy" onclick="copyLink()">Copy Link</div>
+    <div class="share-btn qr" onclick="showQR()">QR Code</div>
+    <div class="share-btn native" onclick="nativeShare()">Quick Share</div>
 
-    </div>
   </div>
+</div>
 
-  <!-- INFO -->
-  <div class="card note">
-    ✅ Share globally – no country restriction<br>
-    ✅ No limit on invites<br>
-    ⚠ Fake or spam traffic may lead to reward cancellation
-  </div>
-
-  <p style="text-align:center;margin-top:20px;">
-    <a href="dashboard.html">⬅ Back to Dashboard</a>
-  </p>
+<!-- INFO -->
+<div class="card info">
+  ✅ Unlimited sharing allowed<br>
+  ✅ Global referral system enabled<br>
+  ⚠ Fake, bot or self-referrals will be removed automatically
+</div>
 
 </div>
 
@@ -167,8 +201,17 @@ footer a{color:#ff6a00;text-decoration:none}
   © 2026 Earn Paisa Today • <a href="index.html">Home</a>
 </footer>
 
+<!-- QR MODAL -->
+<div id="qrModal" onclick="closeQR()">
+  <div onclick="event.stopPropagation()">
+    <h4>Scan QR Code</h4>
+    <img id="qrImage">
+    <br><br>
+    <button onclick="closeQR()">Close</button>
+  </div>
+</div>
+
 <script>
-/* FIREBASE CONFIG */
 const firebaseConfig={
   apiKey:"AIzaSyBwd7y4uG955kZ5eg91ryn8bzbWzK2R_Ks",
   authDomain:"earnpaisatoday.firebaseapp.com",
@@ -177,61 +220,59 @@ const firebaseConfig={
 firebase.initializeApp(firebaseConfig);
 
 const auth=firebase.auth();
+const db=firebase.firestore();
+
 let referralURL="https://earnpaisatoday.web.app/?ref=";
 
-/* AUTH */
 auth.onAuthStateChanged(user=>{
-  if(!user){
-    location.href="login.html";
-    return;
-  }
-  referralURL += user.uid;
-  document.getElementById("refLink").value = referralURL;
+  if(!user){location.href="login.html";return;}
+  referralURL+=user.uid;
+  refLink.value=referralURL;
 });
 
 /* COPY */
 function copyLink(){
-  navigator.clipboard.writeText(referralURL);
-  alert("Referral link copied!");
+  navigator.clipboard.writeText(referralURL).then(()=>{
+    copyStatus.innerText="Referral link copied successfully!";
+    setTimeout(()=>copyStatus.innerText="",2000);
+  });
 }
 
 /* SHARE */
 function share(type){
-  const text = encodeURIComponent(
-    "Earn money online with Earn Paisa Today. Join using my link:"
-  );
-  const url = encodeURIComponent(referralURL);
-
-  let shareURL="";
+  const text=encodeURIComponent("Join Earn Paisa Today and earn online:");
+  const url=encodeURIComponent(referralURL);
+  let u="";
   switch(type){
-    case "whatsapp":
-      shareURL=`https://wa.me/?text=${text}%20${url}`;break;
-    case "telegram":
-      shareURL=`https://t.me/share/url?url=${url}&text=${text}`;break;
-    case "facebook":
-      shareURL=`https://www.facebook.com/sharer/sharer.php?u=${url}`;break;
-    case "twitter":
-      shareURL=`https://twitter.com/intent/tweet?text=${text}&url=${url}`;break;
-    case "linkedin":
-      shareURL=`https://www.linkedin.com/sharing/share-offsite/?url=${url}`;break;
-    case "reddit":
-      shareURL=`https://www.reddit.com/submit?url=${url}&title=${text}`;break;
-    case "email":
-      shareURL=`mailto:?subject=Earn Online&body=${text}%20${url}`;break;
-    case "sms":
-      shareURL=`sms:?&body=${text}%20${url}`;break;
+    case "whatsapp":u=`https://wa.me/?text=${text}%20${url}`;break;
+    case "telegram":u=`https://t.me/share/url?url=${url}&text=${text}`;break;
+    case "facebook":u=`https://www.facebook.com/sharer/sharer.php?u=${url}`;break;
+    case "twitter":u=`https://twitter.com/intent/tweet?text=${text}&url=${url}`;break;
+    case "linkedin":u=`https://www.linkedin.com/sharing/share-offsite/?url=${url}`;break;
   }
-  window.open(shareURL,"_blank");
+  window.open(u,"_blank");
+}
+
+/* NATIVE SHARE */
+function nativeShare(){
+  if(navigator.share){
+    navigator.share({
+      title:"Earn Paisa Today",
+      text:"Earn money online easily.",
+      url:referralURL
+    });
+  }else{
+    alert("Native share not supported on this device.");
+  }
 }
 
 /* QR */
 function showQR(){
-  window.open(
-    "https://api.qrserver.com/v1/create-qr-code/?size=300x300&data="+encodeURIComponent(referralURL),
-    "_blank"
-  );
+  qrImage.src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data="+encodeURIComponent(referralURL);
+  qrModal.style.display="flex";
 }
+function closeQR(){qrModal.style.display="none";}
 </script>
 
 </body>
-        </html>
+</html>
