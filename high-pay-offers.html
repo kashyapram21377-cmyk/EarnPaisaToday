@@ -4,91 +4,160 @@
 <meta charset="UTF-8">
 <title>High Pay Offers | Earn Paisa Today</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="High paying finance, ecommerce, travel & insurance offers from VCommission. Earn more with premium CPA campaigns.">
 
 <style>
+*{box-sizing:border-box}
+
 body{
   margin:0;
-  font-family:Arial, sans-serif;
-  background:#f4f6f9;
+  font-family:Segoe UI,Arial;
+  background:linear-gradient(135deg,#f4f6f9,#eef2ff);
+  color:#333;
 }
 
+/* HEADER */
 header{
   background:linear-gradient(135deg,#ff5722,#ff9800);
   color:#fff;
-  padding:25px;
+  padding:35px 20px;
   text-align:center;
+  box-shadow:0 10px 30px rgba(0,0,0,.15);
 }
 
-header h1{margin:0;}
+header h1{
+  margin:0;
+  font-size:28px;
+}
 
+header p{
+  margin-top:8px;
+  font-size:14px;
+  opacity:.9;
+}
+
+/* FILTERS */
 .filters{
   text-align:center;
-  margin:20px;
+  margin:30px 10px 10px;
 }
 
 .filters button{
-  padding:10px 18px;
-  margin:5px;
+  padding:10px 20px;
+  margin:6px;
   border:none;
-  border-radius:20px;
+  border-radius:25px;
   cursor:pointer;
-  background:#eee;
-  font-weight:bold;
+  background:#eaeaea;
+  font-weight:600;
+  font-size:13px;
+  transition:.3s;
+}
+
+.filters button:hover{
+  background:#ff5722;
+  color:#fff;
 }
 
 .filters button.active{
   background:#ff5722;
   color:#fff;
+  box-shadow:0 5px 15px rgba(255,87,34,.4);
 }
 
+/* CONTAINER */
 .container{
   max-width:1200px;
-  margin:auto;
+  margin:20px auto 60px;
   padding:20px;
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-  gap:20px;
+  gap:22px;
 }
 
+/* CARD */
 .card{
+  position:relative;
   background:#fff;
-  padding:20px;
-  border-radius:12px;
-  box-shadow:0 6px 18px rgba(0,0,0,0.08);
-  transition:.3s;
+  padding:22px;
+  border-radius:18px;
+  box-shadow:0 12px 28px rgba(0,0,0,.08);
+  transition:.35s;
+  overflow:hidden;
 }
 
 .card:hover{
-  transform:translateY(-6px);
-  box-shadow:0 12px 25px rgba(0,0,0,0.12);
+  transform:translateY(-8px);
+  box-shadow:0 18px 35px rgba(0,0,0,.12);
 }
 
-.badge{
+/* RIBBON */
+.ribbon{
+  position:absolute;
+  top:15px;
+  right:-40px;
   background:red;
   color:#fff;
-  padding:4px 8px;
+  padding:5px 45px;
+  transform:rotate(45deg);
   font-size:11px;
-  border-radius:5px;
+  font-weight:bold;
 }
 
-.card h3{margin-top:10px;}
+/* BADGE */
+.badge{
+  display:inline-block;
+  background:#ff5722;
+  color:#fff;
+  padding:5px 10px;
+  font-size:11px;
+  border-radius:12px;
+  margin-bottom:10px;
+}
 
+.card h3{
+  margin:10px 0;
+  font-size:16px;
+  min-height:40px;
+}
+
+.card p{
+  font-size:13px;
+  color:#666;
+  min-height:38px;
+}
+
+/* BUTTON */
 .card a{
   display:block;
   margin-top:15px;
   padding:12px;
   text-align:center;
-  background:#ff5722;
+  background:linear-gradient(135deg,#ff5722,#ff9800);
   color:#fff;
   text-decoration:none;
-  border-radius:8px;
-  font-weight:bold;
+  border-radius:12px;
+  font-weight:700;
+  font-size:13px;
+  transition:.3s;
 }
 
+.card a:hover{
+  opacity:.9;
+}
+
+/* FOOTER */
 footer{
   text-align:center;
-  padding:20px;
-  color:#777;
+  padding:25px;
+  background:#111;
+  color:#aaa;
+  font-size:13px;
+}
+
+footer a{
+  color:#ff5722;
+  text-decoration:none;
 }
 </style>
 </head>
@@ -97,6 +166,7 @@ footer{
 
 <header>
   <h1>🔥 High Pay VCommission Offers</h1>
+  <p>Premium CPA campaigns • High conversion • Verified payouts</p>
 </header>
 
 <div class="filters">
@@ -110,9 +180,49 @@ footer{
 <div class="container" id="offersContainer"></div>
 
 <footer>
-© 2026 Earn Paisa Today
+  © 2026 Earn Paisa Today • 
+  <a href="dashboard.html">Dashboard</a>
 </footer>
 
-<script src="offers.js"></script>
+<script>
+const offers = [
+
+{cat:"finance",title:"Finance Campaign 1",desc:"High payout finance lead offer",link:"https://track.vcommission.com/t/MTI1NTYwXzEzMDQ3/"},
+{cat:"finance",title:"Finance Campaign 2",desc:"Loan / Credit card signup campaign",link:"https://track.vcommission.com/t/MTI1NTYwXzEzMDQ2/"},
+{cat:"ecommerce",title:"Ecommerce Campaign 1",desc:"Shopping affiliate high conversion",link:"https://track.vcommission.com/t/MTI1NTYwXzEyODU5/"},
+{cat:"travel",title:"Travel Booking Offer",desc:"Flight & hotel bookings payout",link:"https://track.vcommission.com/t/MTI1NTYwXzEzMTE2/"},
+{cat:"insurance",title:"Insurance Lead Offer",desc:"Insurance signup commission",link:"https://track.vcommission.com/t/MTI1NTYwXzEyMTMx/"}
+
+];
+
+const container=document.getElementById("offersContainer");
+
+function displayOffers(category){
+  container.innerHTML="";
+  offers.forEach(o=>{
+    if(category==="all" || o.cat===category){
+      const card=document.createElement("div");
+      card.className="card";
+      card.innerHTML=`
+        <div class="ribbon">HOT</div>
+        <span class="badge">${o.cat.toUpperCase()}</span>
+        <h3>${o.title}</h3>
+        <p>${o.desc}</p>
+        <a href="${o.link}" target="_blank">Earn Now →</a>
+      `;
+      container.appendChild(card);
+    }
+  });
+}
+
+function filterOffers(cat){
+  document.querySelectorAll(".filters button").forEach(b=>b.classList.remove("active"));
+  event.target.classList.add("active");
+  displayOffers(cat);
+}
+
+displayOffers("all");
+</script>
+
 </body>
 </html>
