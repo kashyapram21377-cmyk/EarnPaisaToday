@@ -16,17 +16,19 @@ body{
   margin:0;
   font-family:Segoe UI,Arial;
   background:#f4f6f8;
-  color:#222;
 }
 header{
   background:linear-gradient(135deg,#ff5722,#ff9800);
   color:#fff;
-  padding:30px 20px;
+  padding:25px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
 }
 .container{
-  max-width:1200px;
+  max-width:1300px;
   margin:40px auto;
-  padding:0 18px;
+  padding:0 20px;
 }
 .grid{
   display:grid;
@@ -35,10 +37,11 @@ header{
 }
 .card{
   background:#fff;
+  padding:20px;
   border-radius:18px;
-  padding:22px;
-  box-shadow:0 8px 22px rgba(0,0,0,.08);
+  box-shadow:0 8px 25px rgba(0,0,0,.08);
 }
+h3{margin-top:0}
 table{
   width:100%;
   border-collapse:collapse;
@@ -47,9 +50,11 @@ table{
 th,td{
   padding:8px;
   border-bottom:1px solid #eee;
+  text-align:center;
 }
+th{background:#111;color:#fff}
 button{
-  padding:8px 14px;
+  padding:7px 14px;
   border:none;
   border-radius:20px;
   cursor:pointer;
@@ -59,7 +64,7 @@ button{
 .reject{background:#dc2626;color:#fff}
 input,select,textarea{
   width:100%;
-  padding:10px;
+  padding:9px;
   margin:6px 0;
   border-radius:8px;
   border:1px solid #ccc;
@@ -73,6 +78,14 @@ input,select,textarea{
 .pending{background:#f59e0b}
 .approved{background:#16a34a}
 .rejected{background:#dc2626}
+.stat{
+  font-size:26px;
+  font-weight:700;
+}
+.delete{
+  background:#000;
+  color:#fff;
+}
 </style>
 </head>
 
@@ -83,68 +96,86 @@ input,select,textarea{
   <button onclick="logout()">Logout</button>
 </header>
 
-<div class="container grid">
-
-  <div class="card">
-    <h3>Admin Info</h3>
-    <p><b>Email:</b> <span id="adminEmail">Loading...</span></p>
-  </div>
-
-  <div class="card">
-    <h3>👤 Users</h3>
-    <table>
-      <thead><tr><th>Email</th><th>Balance</th></tr></thead>
-      <tbody id="userList"><tr><td colspan="2">Loading...</td></tr></tbody>
-    </table>
-  </div>
-
-  <div class="card">
-    <h3>➕ Add Earnings</h3>
-    <input id="earnUid" placeholder="User UID">
-    <input id="earnAmount" type="number" placeholder="Amount">
-    <input id="earnSource" placeholder="Source">
-    <button class="approve" onclick="addEarning()">Add</button>
-    <div id="earnMsg"></div>
-  </div>
-
-  <div class="card">
-    <h3>💸 Withdraw Requests</h3>
-    <table>
-      <thead>
-        <tr><th>Email</th><th>Amount</th><th>Method</th><th>Status</th><th>Action</th></tr>
-      </thead>
-      <tbody id="withdrawList"><tr><td colspan="5">Loading...</td></tr></tbody>
-    </table>
-  </div>
-
-</div>
-
-<hr style="margin:40px">
-
 <div class="container">
 
-<h2>🔥 Manage Offers (ON / OFF)</h2>
+<!-- ================= STATS ================= -->
+<div class="grid">
+  <div class="card">
+    <h3>Total Users</h3>
+    <div class="stat" id="totalUsers">0</div>
+  </div>
+  <div class="card">
+    <h3>Total Earnings Given</h3>
+    <div class="stat">₹<span id="totalEarnings">0</span></div>
+  </div>
+  <div class="card">
+    <h3>Total Withdraw Approved</h3>
+    <div class="stat">₹<span id="totalWithdraw">0</span></div>
+  </div>
+</div>
+
+<br><br>
+
+<!-- ================= USERS ================= -->
+<div class="card">
+<h3>👤 Users</h3>
+<table>
+<thead><tr><th>Email</th><th>Balance</th></tr></thead>
+<tbody id="userList"></tbody>
+</table>
+</div>
+
+<br><br>
+
+<!-- ================= ADD EARNING ================= -->
+<div class="card">
+<h3>➕ Add Earnings</h3>
+<input id="earnUid" placeholder="User UID">
+<input id="earnAmount" type="number" placeholder="Amount">
+<input id="earnSource" placeholder="Source">
+<button class="approve" onclick="addEarning()">Add</button>
+<div id="earnMsg"></div>
+</div>
+
+<br><br>
+
+<!-- ================= WITHDRAW ================= -->
+<div class="card">
+<h3>💸 Withdraw Requests</h3>
+<table>
+<thead>
+<tr><th>Email</th><th>Amount</th><th>Status</th><th>Action</th></tr>
+</thead>
+<tbody id="withdrawList"></tbody>
+</table>
+</div>
+
+<br><br>
+
+<!-- ================= OFFERS ================= -->
+<div class="card">
+<h3>🔥 Manage Offers</h3>
 <div id="offers"></div>
+</div>
 
-<hr style="margin:40px">
+<br><br>
 
-<h2>➕ Add New Offer</h2>
-
-<div class="card" style="max-width:500px">
-  <input id="o_title" placeholder="Offer Title">
-  <input id="o_link" placeholder="Offer Link https://">
-  <select id="o_category">
-    <option value="">Select Category</option>
-    <option value="international">International</option>
-    <option value="affiliate">Affiliate</option>
-    <option value="survey">Survey</option>
-    <option value="mobile">Mobile App</option>
-    <option value="finance">Finance</option>
-  </select>
-  <textarea id="o_desc" placeholder="Description"></textarea>
-  <label><input type="checkbox" id="o_active" checked> Active</label><br><br>
-  <button class="approve" onclick="addOffer()">✅ Add Offer</button>
-  <div id="addMsg"></div>
+<!-- ================= ADD OFFER ================= -->
+<div class="card">
+<h3>➕ Add New Offer</h3>
+<input id="o_title" placeholder="Offer Title">
+<input id="o_link" placeholder="Offer Link https://">
+<select id="o_category">
+<option value="">Select Category</option>
+<option value="international">International</option>
+<option value="affiliate">Affiliate</option>
+<option value="survey">Survey</option>
+<option value="finance">Finance</option>
+</select>
+<textarea id="o_desc" placeholder="Description"></textarea>
+<label><input type="checkbox" id="o_active" checked> Active</label><br><br>
+<button class="approve" onclick="addOffer()">Add Offer</button>
+<div id="addMsg"></div>
 </div>
 
 </div>
@@ -159,41 +190,84 @@ firebase.initializeApp(firebaseConfig);
 
 const auth=firebase.auth();
 const db=firebase.firestore();
-const ADMIN_EMAIL="kashyapram21377@gmail.com";
 
-auth.onAuthStateChanged(user=>{
-  if(!user || user.email!==ADMIN_EMAIL){
+/* ===== ADMIN ROLE CHECK ===== */
+auth.onAuthStateChanged(async user=>{
+  if(!user){ location.href="login.html"; return; }
+
+  const doc=await db.collection("users").doc(user.uid).get();
+  if(!doc.exists || doc.data().role!=="admin"){
     alert("Admin only");
     auth.signOut();
     location.href="login.html";
     return;
   }
-  adminEmail.textContent=user.email;
+
+  loadStats();
   loadUsers();
   loadWithdraws();
   loadOffers();
 });
 
+/* ===== STATS ===== */
+function loadStats(){
+  db.collection("users").onSnapshot(snap=>{
+    totalUsers.textContent=snap.size;
+  });
+
+  db.collection("earnings_history").onSnapshot(snap=>{
+    let total=0;
+    snap.forEach(d=> total+=d.data().amount||0);
+    totalEarnings.textContent=total;
+  });
+
+  db.collection("withdraw_requests")
+    .where("status","==","approved")
+    .onSnapshot(snap=>{
+      let total=0;
+      snap.forEach(d=> total+=d.data().amount||0);
+      totalWithdraw.textContent=total;
+    });
+}
+
+/* ===== USERS ===== */
 function loadUsers(){
   db.collection("users").onSnapshot(snap=>{
     userList.innerHTML="";
     snap.forEach(d=>{
       const u=d.data();
-      userList.innerHTML+=`<tr><td>${u.email||"-"}</td><td>₹${u.balance||0}</td></tr>`;
+      userList.innerHTML+=`
+      <tr>
+        <td>${u.email||"-"}</td>
+        <td>₹${u.balance||0}</td>
+      </tr>`;
     });
   });
 }
 
+/* ===== ADD EARNING ===== */
 function addEarning(){
   const uid=earnUid.value.trim();
   const amt=Number(earnAmount.value);
-  if(!uid||amt<=0)return;
+  const src=earnSource.value;
+
+  if(!uid||amt<=0) return;
+
   db.collection("users").doc(uid).update({
     balance:firebase.firestore.FieldValue.increment(amt)
   });
-  earnMsg.innerHTML="✅ Added";
+
+  db.collection("earnings_history").add({
+    uid,
+    amount:amt,
+    source:src,
+    createdAt:firebase.firestore.FieldValue.serverTimestamp()
+  });
+
+  earnMsg.innerHTML="✅ Added Successfully";
 }
 
+/* ===== WITHDRAW ===== */
 function loadWithdraws(){
   db.collection("withdraw_requests").onSnapshot(snap=>{
     withdrawList.innerHTML="";
@@ -203,7 +277,6 @@ function loadWithdraws(){
       <tr>
         <td>${w.userEmail}</td>
         <td>₹${w.amount}</td>
-        <td>${w.method}</td>
         <td><span class="badge ${w.status}">${w.status}</span></td>
         <td>${w.status==="pending"?`
           <button class="approve" onclick="updateWithdraw('${d.id}','approved',${w.amount},'${w.uid}')">Approve</button>
@@ -217,22 +290,25 @@ function updateWithdraw(id,status,amt,uid){
   db.collection("withdraw_requests").doc(id).update({status});
   if(status==="approved"){
     db.collection("users").doc(uid)
-      .update({balance:firebase.firestore.FieldValue.increment(-amt)});
+    .update({balance:firebase.firestore.FieldValue.increment(-amt)});
   }
 }
 
+/* ===== OFFERS ===== */
 function loadOffers(){
   db.collection("offers").onSnapshot(snap=>{
     offers.innerHTML="";
     snap.forEach(doc=>{
       const d=doc.data();
       offers.innerHTML+=`
-      <div class="card">
-        <b>${d.title}</b><br>
-        <small>${d.category}</small><br><br>
+      <div class="card" style="margin-bottom:15px">
+        <b>${d.title}</b> (${d.category})<br><br>
         <button onclick="toggleOffer('${doc.id}',${d.active})"
         style="background:${d.active?'#16a34a':'#dc2626'};color:#fff">
-        ${d.active?'ON':'OFF'}</button>
+        ${d.active?'ON':'OFF'}
+        </button>
+        <button class="delete"
+        onclick="deleteOffer('${doc.id}')">Delete</button>
       </div>`;
     });
   });
@@ -242,8 +318,15 @@ function toggleOffer(id,state){
   db.collection("offers").doc(id).update({active:!state});
 }
 
+function deleteOffer(id){
+  if(confirm("Delete this offer?")){
+    db.collection("offers").doc(id).delete();
+  }
+}
+
 function addOffer(){
-  if(!o_title.value||!o_link.value||!o_category.value)return;
+  if(!o_title.value||!o_link.value||!o_category.value) return;
+
   db.collection("offers").add({
     title:o_title.value,
     link:o_link.value,
@@ -252,6 +335,7 @@ function addOffer(){
     active:o_active.checked,
     createdAt:firebase.firestore.FieldValue.serverTimestamp()
   });
+
   addMsg.innerHTML="✅ Offer Added";
 }
 
