@@ -22,80 +22,227 @@ const db   = firebase.firestore();
 </script>
 
 <style>
-*{box-sizing:border-box}
-body{margin:0;font-family:Segoe UI,Arial;background:#f4f6f8;color:#222}
+
+/* ===============================
+   🔥 ULTRA PREMIUM UI SYSTEM
+================================= */
+
+:root{
+  --primary:#ff5722;
+  --primary-dark:#e64a19;
+  --black:#111;
+  --bg:#f4f6f8;
+  --card:#ffffff;
+  --text:#222;
+  --muted:#666;
+  --radius:22px;
+}
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+body{
+  font-family:Segoe UI,Arial,sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  line-height:1.6;
+}
 
 /* NAV */
 nav{
-  background:#111;color:#fff;padding:12px 20px;
-  display:flex;justify-content:space-between;align-items:center;
-  position:sticky;top:0;z-index:999;
+  position:sticky;
+  top:0;
+  backdrop-filter:blur(12px);
+  background:rgba(0,0,0,0.85);
+  padding:18px 40px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  z-index:999;
 }
-nav .logo{font-weight:900}
-nav a{color:#fff;text-decoration:none;margin-left:14px;font-size:14px}
+
+nav .logo{
+  font-weight:900;
+  font-size:20px;
+  color:#fff;
+}
+
+nav a{
+  color:#fff;
+  text-decoration:none;
+  margin-left:20px;
+  font-weight:600;
+  font-size:14px;
+  transition:.3s;
+}
+
+nav a:hover{
+  color:var(--primary);
+}
 
 /* HERO */
 header{
+  padding:120px 20px 100px;
+  text-align:center;
   background:linear-gradient(135deg,#ff5722,#ff9800);
-  color:#fff;text-align:center;padding:70px 20px;
+  color:#fff;
 }
-header h1{margin:0;font-size:42px;font-weight:900}
-header p{margin:14px 0 30px;font-size:17px}
+
+header h1{
+  font-size:48px;
+  font-weight:900;
+}
+
+header p{
+  margin:18px 0 30px;
+  font-size:18px;
+}
+
 .hero-btn{
-  padding:14px 34px;border-radius:30px;
-  font-weight:800;text-decoration:none;margin:6px;display:inline-block
+  display:inline-block;
+  padding:15px 36px;
+  border-radius:40px;
+  font-weight:800;
+  text-decoration:none;
+  margin:6px;
+  transition:.3s;
 }
-.btn-main{background:#fff;color:#ff5722}
-.btn-alt{background:#000;color:#fff}
+
+.btn-main{
+  background:#fff;
+  color:var(--primary);
+}
+
+.btn-alt{
+  background:#000;
+  color:#fff;
+}
+
+.hero-btn:hover{
+  transform:translateY(-3px);
+}
 
 /* CONTAINER */
-.container{max-width:1200px;margin:60px auto;padding:0 16px}
+.container{
+  max-width:1250px;
+  margin:auto;
+  padding:0 24px;
+}
+
+/* SECTION TITLE */
 .section-title{
-  font-size:26px;margin:50px 0 22px;
-  border-left:6px solid #ff5722;padding-left:14px;font-weight:900
+  font-size:28px;
+  font-weight:900;
+  margin:80px 0 30px;
+  border-left:6px solid var(--primary);
+  padding-left:16px;
 }
 
 /* GRID */
 .grid{
   display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-  gap:26px
+  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+  gap:32px;
 }
+
+/* CARD */
 .card{
-  background:#fff;border-radius:20px;padding:26px;
-  box-shadow:0 10px 30px rgba(0,0,0,.1);transition:.3s
+  background:var(--card);
+  padding:32px;
+  border-radius:var(--radius);
+  box-shadow:0 15px 40px rgba(0,0,0,.08);
+  transition:.35s;
+  position:relative;
 }
-.card:hover{transform:translateY(-8px);box-shadow:0 18px 45px rgba(0,0,0,.18)}
-.card h3{margin:0 0 10px}
-.card p{font-size:14px;color:#555}
+
+.card:hover{
+  transform:translateY(-10px);
+  box-shadow:0 25px 60px rgba(0,0,0,.15);
+}
+
+.card::before{
+  content:"";
+  position:absolute;
+  top:0;
+  left:0;
+  height:5px;
+  width:100%;
+  background:linear-gradient(90deg,#ff5722,#ff9800);
+}
+
+.card h3{
+  margin-bottom:12px;
+}
+
+.card p{
+  font-size:14px;
+  color:var(--muted);
+}
+
 .card a{
-  display:inline-block;margin-top:12px;padding:10px 20px;
-  border-radius:24px;background:#ff5722;color:#fff;text-decoration:none;font-weight:700
+  display:inline-block;
+  margin-top:18px;
+  padding:12px 24px;
+  border-radius:30px;
+  background:linear-gradient(135deg,#ff5722,#ff9800);
+  color:#fff;
+  text-decoration:none;
+  font-weight:700;
+  font-size:14px;
 }
 
 /* STATS */
 .stats{
-  display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
-  gap:20px;text-align:center;margin-top:30px
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:24px;
+  margin-top:40px;
 }
+
 .stat-box{
-  background:#fff;padding:20px;border-radius:18px;
-  box-shadow:0 8px 20px rgba(0,0,0,.08)
+  background:#fff;
+  padding:30px;
+  border-radius:var(--radius);
+  text-align:center;
+  box-shadow:0 12px 30px rgba(0,0,0,.08);
 }
-.stat-box h2{margin:0;color:#ff5722}
+
+.stat-box h2{
+  font-size:32px;
+  color:var(--primary);
+}
 
 /* FOOTER */
 footer{
-  margin-top:80px;background:#111;color:#aaa;
-  text-align:center;padding:30px
+  margin-top:100px;
+  background:#0f0f0f;
+  color:#aaa;
+  padding:50px 20px;
+  text-align:center;
 }
-footer a{color:#ccc;text-decoration:none;margin:0 8px}
+
+footer a{
+  color:#ccc;
+  margin:0 10px;
+  text-decoration:none;
+}
+
+@media(max-width:768px){
+  nav{padding:14px 18px;}
+  header{padding:90px 20px;}
+  header h1{font-size:34px;}
+  .card{padding:24px;}
+  .section-title{margin:60px 0 24px;}
+}
+
 </style>
 </head>
 
 <body>
 
-<!-- NAV -->
 <nav>
   <div class="logo">Earn Paisa Today</div>
   <div>
@@ -105,7 +252,6 @@ footer a{color:#ccc;text-decoration:none;margin:0 8px}
   </div>
 </nav>
 
-<!-- HERO -->
 <header>
   <h1>Earn Paisa Today</h1>
   <p>India & International Genuine Online Earning Platform</p>
@@ -115,49 +261,28 @@ footer a{color:#ccc;text-decoration:none;margin:0 8px}
 
 <div class="container">
 
-<!-- STATS -->
 <div class="stats">
   <div class="stat-box"><h2>10K+</h2><p>Active Users</p></div>
   <div class="stat-box"><h2>₹5L+</h2><p>Total Payout</p></div>
   <div class="stat-box"><h2>100+</h2><p>Affiliate Offers</p></div>
 </div>
 
-<!-- CORE -->
 <h2 class="section-title">🔥 Core Earning Methods</h2>
 <div class="grid">
-  <div class="card"><h3>💳 Affiliate</h3><a href="affiliate-marketing.html">View</a></div>
-  <div class="card"><h3>📊 Surveys</h3><a href="survey-tasks.html">Start</a></div>
-  <div class="card"><h3>🌍 International</h3><a href="international-offers.html">Explore</a></div>
-  <div class="card"><h3>📤 Referral</h3><a href="share.html">Share</a></div>
-</div>
-
-<!-- HIGH PAY PREVIEW -->
-<h2 class="section-title">🔥 High Pay CPA Offers</h2>
-
-<div style="text-align:center;margin-bottom:20px">
-<input id="homeSearch" placeholder="Search Offers..."
-onkeyup="homeSearchOffers()"
-style="padding:10px 18px;border-radius:25px;border:1px solid #ccc;width:260px;">
-</div>
-
-<div class="grid" id="homeOffers"></div>
-
-<div style="text-align:center;margin-top:30px">
-<a href="high-pay-offers.html"
-style="padding:14px 30px;background:#111;color:#fff;
-border-radius:30px;text-decoration:none;font-weight:800;">
-View All High Pay Offers →
-</a>
+  <div class="card"><h3>💳 Affiliate</h3><p>Finance & shopping campaigns</p><a href="affiliate-marketing.html">View</a></div>
+  <div class="card"><h3>📊 Surveys</h3><p>Complete tasks & earn</p><a href="survey-tasks.html">Start</a></div>
+  <div class="card"><h3>🌍 International</h3><p>Global earning apps</p><a href="international-offers.html">Explore</a></div>
+  <div class="card"><h3>📤 Referral</h3><p>Invite & earn bonus</p><a href="share.html">Share</a></div>
 </div>
 
 </div>
 
 <footer>
-<a href="privacy-policy.html">Privacy</a> |
-<a href="terms-conditions.html">Terms</a> |
-<a href="disclaimer.html">Disclaimer</a> |
-<a href="contact-us.html">Contact</a>
-<p>© 2026 Earn Paisa Today</p>
+  <a href="privacy-policy.html">Privacy</a> |
+  <a href="terms-conditions.html">Terms</a> |
+  <a href="disclaimer.html">Disclaimer</a> |
+  <a href="contact-us.html">Contact</a>
+  <p>© 2026 Earn Paisa Today</p>
 </footer>
 
 <script>
@@ -170,49 +295,6 @@ auth.onAuthStateChanged(user=>{
     }
   }
 });
-
-/* REF */
-const ref=new URLSearchParams(window.location.search).get("ref");
-if(ref){localStorage.setItem("referrer",ref);}
-
-/* HIGH PAY PREVIEW */
-const homeOffers=[
-{cat:"finance",title:"Finance Campaign",desc:"Loan & credit card signup"},
-{cat:"ecommerce",title:"Ecommerce Campaign",desc:"Shopping affiliate"},
-{cat:"travel",title:"Travel Booking",desc:"Flight & hotel"},
-{cat:"insurance",title:"Insurance Lead",desc:"Policy commission"}
-];
-
-function displayHomeOffers(){
-  const c=document.getElementById("homeOffers");
-  c.innerHTML="";
-  homeOffers.forEach(o=>{
-    c.innerHTML+=`
-    <div class="card">
-      <h3>${o.title}</h3>
-      <p>${o.desc}</p>
-      <a href="high-pay-offers.html">Explore →</a>
-    </div>`;
-  });
-}
-
-function homeSearchOffers(){
-  const v=homeSearch.value.toLowerCase();
-  const c=document.getElementById("homeOffers");
-  c.innerHTML="";
-  homeOffers.forEach(o=>{
-    if(o.title.toLowerCase().includes(v)){
-      c.innerHTML+=`
-      <div class="card">
-        <h3>${o.title}</h3>
-        <p>${o.desc}</p>
-        <a href="high-pay-offers.html">Explore →</a>
-      </div>`;
-    }
-  });
-}
-
-displayHomeOffers();
 </script>
 
 </body>
