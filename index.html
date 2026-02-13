@@ -2,61 +2,74 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Earn Paisa Today – Trusted Online Earning Platform</title>
+<title>Earn Paisa Today – Premium Online Earning Platform</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Earn Paisa Today is a trusted online earning platform for affiliate marketing, surveys, international apps and referral income.">
+<meta name="description" content="Earn Paisa Today is a premium earning platform for affiliate marketing, surveys, international apps & referral income.">
 
 <!-- Firebase -->
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
 
 <script>
 firebase.initializeApp({
-  apiKey: "AIzaSyBwd7y4uG955kZ5eg91ryn8bzbWzK2R_Ks",
-  authDomain: "earnpaisatoday.firebaseapp.com",
-  projectId: "earnpaisatoday"
+  apiKey:"AIzaSyBwd7y4uG955kZ5eg91ryn8bzbWzK2R_Ks",
+  authDomain:"earnpaisatoday.firebaseapp.com",
+  projectId:"earnpaisatoday"
 });
 const auth = firebase.auth();
-const db   = firebase.firestore();
 </script>
 
 <style>
 
-/* ===============================
-   🔥 ULTRA PREMIUM UI SYSTEM
-================================= */
-
+/* ================= ROOT ================= */
 :root{
   --primary:#ff5722;
-  --primary-dark:#e64a19;
-  --black:#111;
+  --primary2:#ff9800;
   --bg:#f4f6f8;
   --card:#ffffff;
   --text:#222;
-  --muted:#666;
-  --radius:22px;
 }
 
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
+body.dark{
+  --bg:#0f1115;
+  --card:#1c1f26;
+  --text:#ffffff;
 }
+
+*{margin:0;padding:0;box-sizing:border-box}
 
 body{
-  font-family:Segoe UI,Arial,sans-serif;
+  font-family:Segoe UI,Arial;
   background:var(--bg);
   color:var(--text);
-  line-height:1.6;
+  transition:.4s ease;
+  overflow-x:hidden;
 }
 
-/* NAV */
+/* ================= ANIMATED BACKGROUND ================= */
+.bg-animation{
+  position:fixed;
+  width:100%;
+  height:100%;
+  background:linear-gradient(-45deg,#ff5722,#ff9800,#ff7043,#ffa726);
+  background-size:400% 400%;
+  animation:gradient 12s ease infinite;
+  z-index:-1;
+  opacity:.08;
+}
+
+@keyframes gradient{
+  0%{background-position:0% 50%}
+  50%{background-position:100% 50%}
+  100%{background-position:0% 50%}
+}
+
+/* ================= NAVBAR ================= */
 nav{
   position:sticky;
   top:0;
-  backdrop-filter:blur(12px);
-  background:rgba(0,0,0,0.85);
+  backdrop-filter:blur(14px);
+  background:rgba(0,0,0,.75);
   padding:18px 40px;
   display:flex;
   justify-content:space-between;
@@ -83,11 +96,20 @@ nav a:hover{
   color:var(--primary);
 }
 
-/* HERO */
+.toggle-btn{
+  background:#fff;
+  border:none;
+  padding:8px 14px;
+  border-radius:20px;
+  cursor:pointer;
+  font-weight:700;
+  margin-left:15px;
+}
+
+/* ================= HERO ================= */
 header{
-  padding:120px 20px 100px;
+  padding:120px 20px;
   text-align:center;
-  background:linear-gradient(135deg,#ff5722,#ff9800);
   color:#fff;
 }
 
@@ -97,104 +119,76 @@ header h1{
 }
 
 header p{
-  margin:18px 0 30px;
+  margin:20px 0;
   font-size:18px;
 }
 
 .hero-btn{
   display:inline-block;
-  padding:15px 36px;
-  border-radius:40px;
+  padding:14px 32px;
+  border-radius:30px;
+  background:#fff;
+  color:#ff5722;
   font-weight:800;
   text-decoration:none;
-  margin:6px;
+  margin:8px;
   transition:.3s;
 }
 
-.btn-main{
-  background:#fff;
-  color:var(--primary);
-}
-
-.btn-alt{
-  background:#000;
-  color:#fff;
-}
-
 .hero-btn:hover{
-  transform:translateY(-3px);
+  transform:translateY(-6px);
+  box-shadow:0 20px 40px rgba(0,0,0,.3);
 }
 
-/* CONTAINER */
+/* ================= CONTAINER ================= */
 .container{
-  max-width:1250px;
-  margin:auto;
-  padding:0 24px;
+  max-width:1200px;
+  margin:80px auto;
+  padding:0 20px;
 }
 
-/* SECTION TITLE */
+/* ================= SECTION ================= */
 .section-title{
   font-size:28px;
   font-weight:900;
-  margin:80px 0 30px;
+  margin:70px 0 30px;
   border-left:6px solid var(--primary);
   padding-left:16px;
 }
 
-/* GRID */
+/* ================= GRID ================= */
 .grid{
   display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-  gap:32px;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:30px;
 }
 
-/* CARD */
+/* ================= CARD ================= */
 .card{
   background:var(--card);
-  padding:32px;
-  border-radius:var(--radius);
-  box-shadow:0 15px 40px rgba(0,0,0,.08);
-  transition:.35s;
-  position:relative;
+  padding:30px;
+  border-radius:22px;
+  box-shadow:0 15px 40px rgba(0,0,0,.1);
+  transition:.4s cubic-bezier(.2,.8,.2,1);
 }
 
 .card:hover{
-  transform:translateY(-10px);
-  box-shadow:0 25px 60px rgba(0,0,0,.15);
-}
-
-.card::before{
-  content:"";
-  position:absolute;
-  top:0;
-  left:0;
-  height:5px;
-  width:100%;
-  background:linear-gradient(90deg,#ff5722,#ff9800);
-}
-
-.card h3{
-  margin-bottom:12px;
-}
-
-.card p{
-  font-size:14px;
-  color:var(--muted);
+  transform:translateY(-12px) scale(1.03);
+  box-shadow:0 30px 70px rgba(0,0,0,.2);
 }
 
 .card a{
   display:inline-block;
-  margin-top:18px;
+  margin-top:15px;
   padding:12px 24px;
-  border-radius:30px;
-  background:linear-gradient(135deg,#ff5722,#ff9800);
+  border-radius:25px;
+  background:linear-gradient(135deg,var(--primary),var(--primary2));
   color:#fff;
   text-decoration:none;
   font-weight:700;
-  font-size:14px;
 }
 
-/* STATS */
+/* ================= STATS ================= */
 .stats{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
@@ -203,39 +197,51 @@ header p{
 }
 
 .stat-box{
-  background:#fff;
+  background:var(--card);
   padding:30px;
-  border-radius:var(--radius);
+  border-radius:22px;
   text-align:center;
   box-shadow:0 12px 30px rgba(0,0,0,.08);
+  animation:float 4s ease-in-out infinite;
 }
 
 .stat-box h2{
-  font-size:32px;
+  font-size:34px;
   color:var(--primary);
 }
 
-/* FOOTER */
-footer{
-  margin-top:100px;
-  background:#0f0f0f;
-  color:#aaa;
-  padding:50px 20px;
-  text-align:center;
+/* FLOAT */
+@keyframes float{
+  0%{transform:translateY(0)}
+  50%{transform:translateY(-8px)}
+  100%{transform:translateY(0)}
 }
 
-footer a{
-  color:#ccc;
-  margin:0 10px;
-  text-decoration:none;
+/* ================= SCROLL REVEAL ================= */
+.fade-in{
+  opacity:0;
+  transform:translateY(40px);
+  transition:.8s ease;
+}
+
+.fade-in.show{
+  opacity:1;
+  transform:translateY(0);
+}
+
+/* ================= FOOTER ================= */
+footer{
+  margin-top:100px;
+  padding:40px;
+  text-align:center;
+  background:#111;
+  color:#aaa;
 }
 
 @media(max-width:768px){
-  nav{padding:14px 18px;}
-  header{padding:90px 20px;}
-  header h1{font-size:34px;}
-  .card{padding:24px;}
-  .section-title{margin:60px 0 24px;}
+  nav{padding:14px 18px}
+  header{padding:90px 20px}
+  header h1{font-size:34px}
 }
 
 </style>
@@ -243,49 +249,54 @@ footer a{
 
 <body>
 
+<div class="bg-animation"></div>
+
 <nav>
   <div class="logo">Earn Paisa Today</div>
   <div>
     <a href="index.html">Home</a>
-    <a href="international-offers.html">Offers</a>
     <a href="login.html" id="loginBtn">Login</a>
+    <button class="toggle-btn" onclick="toggleMode()">🌙</button>
   </div>
 </nav>
 
-<header>
+<header class="fade-in">
   <h1>Earn Paisa Today</h1>
-  <p>India & International Genuine Online Earning Platform</p>
-  <a href="login.html" class="hero-btn btn-main">🚀 Start Earning</a>
-  <a href="international-offers.html" class="hero-btn btn-alt">🌍 Explore Offers</a>
+  <p>India & International Premium Online Earning Platform</p>
+  <a href="login.html" class="hero-btn">Start Earning</a>
 </header>
 
 <div class="container">
 
-<div class="stats">
-  <div class="stat-box"><h2>10K+</h2><p>Active Users</p></div>
-  <div class="stat-box"><h2>₹5L+</h2><p>Total Payout</p></div>
-  <div class="stat-box"><h2>100+</h2><p>Affiliate Offers</p></div>
+<div class="stats fade-in">
+  <div class="stat-box"><h2 data-count="10000">0</h2><p>Active Users</p></div>
+  <div class="stat-box"><h2 data-count="500000">0</h2><p>Total Payout</p></div>
+  <div class="stat-box"><h2 data-count="100">0</h2><p>Offers</p></div>
 </div>
 
-<h2 class="section-title">🔥 Core Earning Methods</h2>
+<h2 class="section-title fade-in">Core Earning Methods</h2>
+
 <div class="grid">
-  <div class="card"><h3>💳 Affiliate</h3><p>Finance & shopping campaigns</p><a href="affiliate-marketing.html">View</a></div>
-  <div class="card"><h3>📊 Surveys</h3><p>Complete tasks & earn</p><a href="survey-tasks.html">Start</a></div>
-  <div class="card"><h3>🌍 International</h3><p>Global earning apps</p><a href="international-offers.html">Explore</a></div>
-  <div class="card"><h3>📤 Referral</h3><p>Invite & earn bonus</p><a href="share.html">Share</a></div>
+  <div class="card fade-in"><h3>Affiliate Marketing</h3><a href="affiliate-marketing.html">View</a></div>
+  <div class="card fade-in"><h3>Surveys & Tasks</h3><a href="survey-tasks.html">Start</a></div>
+  <div class="card fade-in"><h3>International Apps</h3><a href="international-offers.html">Explore</a></div>
+  <div class="card fade-in"><h3>Referral Program</h3><a href="share.html">Share</a></div>
 </div>
 
 </div>
 
 <footer>
-  <a href="privacy-policy.html">Privacy</a> |
-  <a href="terms-conditions.html">Terms</a> |
-  <a href="disclaimer.html">Disclaimer</a> |
-  <a href="contact-us.html">Contact</a>
-  <p>© 2026 Earn Paisa Today</p>
+  © 2026 Earn Paisa Today
 </footer>
 
 <script>
+
+/* DARK MODE */
+function toggleMode(){
+  document.body.classList.toggle("dark");
+}
+
+/* LOGIN AUTO SWITCH */
 auth.onAuthStateChanged(user=>{
   if(user){
     loginBtn.innerText="Dashboard";
@@ -295,6 +306,46 @@ auth.onAuthStateChanged(user=>{
     }
   }
 });
+
+/* SCROLL REVEAL */
+const observer=new IntersectionObserver(entries=>{
+  entries.forEach(entry=>{
+    if(entry.isIntersecting){
+      entry.target.classList.add("show");
+    }
+  });
+},{threshold:0.15});
+
+document.querySelectorAll(".fade-in").forEach(el=>{
+  observer.observe(el);
+});
+
+/* COUNTER */
+function animateCounter(el,target){
+  let count=0;
+  const speed=target/120;
+  const update=()=>{
+    count+=speed;
+    if(count<target){
+      el.innerText=Math.floor(count);
+      requestAnimationFrame(update);
+    }else{
+      el.innerText=target.toLocaleString()+"+";
+    }
+  };
+  update();
+}
+
+document.querySelectorAll("[data-count]").forEach(el=>{
+  animateCounter(el,parseInt(el.dataset.count));
+});
+
+/* REF TRACKING */
+const ref=new URLSearchParams(window.location.search).get("ref");
+if(ref){
+  localStorage.setItem("referrer",ref);
+}
+
 </script>
 
 </body>
