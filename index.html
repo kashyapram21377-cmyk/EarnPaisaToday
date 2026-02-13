@@ -4,11 +4,11 @@
 <meta charset="UTF-8">
 <title>Earn Paisa Today – Premium Online Earning Platform</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Earn Paisa Today is a premium earning platform for affiliate marketing, surveys, international apps & referral income.">
 
 <!-- Firebase -->
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
 
 <script>
 firebase.initializeApp({
@@ -17,10 +17,11 @@ firebase.initializeApp({
   projectId:"earnpaisatoday"
 });
 const auth = firebase.auth();
-const db   = firebase.firestore();
 </script>
 
 <style>
+
+/* ================= ROOT ================= */
 :root{
   --primary:#ff5722;
   --primary2:#ff9800;
@@ -42,77 +43,140 @@ body{
   background:var(--bg);
   color:var(--text);
   transition:.4s ease;
+  overflow-x:hidden;
 }
 
-/* NAV */
+/* ================= ANIMATED BACKGROUND ================= */
+.bg-animation{
+  position:fixed;
+  width:100%;
+  height:100%;
+  background:linear-gradient(-45deg,#ff5722,#ff9800,#ff7043,#ffa726);
+  background-size:400% 400%;
+  animation:gradient 12s ease infinite;
+  z-index:-1;
+  opacity:.08;
+}
+
+@keyframes gradient{
+  0%{background-position:0% 50%}
+  50%{background-position:100% 50%}
+  100%{background-position:0% 50%}
+}
+
+/* ================= NAVBAR ================= */
 nav{
   position:sticky;
   top:0;
-  background:rgba(0,0,0,.85);
+  backdrop-filter:blur(14px);
+  background:rgba(0,0,0,.75);
   padding:18px 40px;
   display:flex;
   justify-content:space-between;
   align-items:center;
   z-index:999;
 }
-nav .logo{color:#fff;font-weight:900}
-nav a{color:#fff;text-decoration:none;margin-left:20px}
-.toggle-btn{background:#fff;border:none;padding:6px 12px;border-radius:20px}
 
-/* HERO */
-header{
-  padding:110px 20px;
-  text-align:center;
-  background:linear-gradient(135deg,var(--primary),var(--primary2));
+nav .logo{
+  font-weight:900;
+  font-size:20px;
   color:#fff;
 }
-header h1{font-size:46px;font-weight:900}
-header p{margin:20px 0;font-size:18px}
+
+nav a{
+  color:#fff;
+  text-decoration:none;
+  margin-left:20px;
+  font-weight:600;
+  font-size:14px;
+  transition:.3s;
+}
+
+nav a:hover{
+  color:var(--primary);
+}
+
+.toggle-btn{
+  background:#fff;
+  border:none;
+  padding:8px 14px;
+  border-radius:20px;
+  cursor:pointer;
+  font-weight:700;
+  margin-left:15px;
+}
+
+/* ================= HERO ================= */
+header{
+  padding:120px 20px;
+  text-align:center;
+  color:#fff;
+}
+
+header h1{
+  font-size:48px;
+  font-weight:900;
+}
+
+header p{
+  margin:20px 0;
+  font-size:18px;
+}
+
 .hero-btn{
   display:inline-block;
   padding:14px 32px;
   border-radius:30px;
   background:#fff;
-  color:var(--primary);
+  color:#ff5722;
   font-weight:800;
   text-decoration:none;
+  margin:8px;
+  transition:.3s;
 }
 
-/* CONTAINER */
-.container{max-width:1200px;margin:80px auto;padding:0 20px}
-
-/* STATS */
-.stats{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-  gap:24px;
-}
-.stat-box{
-  background:var(--card);
-  padding:30px;
-  border-radius:22px;
-  text-align:center;
-  box-shadow:0 12px 30px rgba(0,0,0,.08);
-}
-.stat-box h2{
-  font-size:34px;
-  color:var(--primary);
+.hero-btn:hover{
+  transform:translateY(-6px);
+  box-shadow:0 20px 40px rgba(0,0,0,.3);
 }
 
-/* GRID */
+/* ================= CONTAINER ================= */
+.container{
+  max-width:1200px;
+  margin:80px auto;
+  padding:0 20px;
+}
+
+/* ================= SECTION ================= */
+.section-title{
+  font-size:28px;
+  font-weight:900;
+  margin:70px 0 30px;
+  border-left:6px solid var(--primary);
+  padding-left:16px;
+}
+
+/* ================= GRID ================= */
 .grid{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
   gap:30px;
 }
+
+/* ================= CARD ================= */
 .card{
   background:var(--card);
   padding:30px;
   border-radius:22px;
   box-shadow:0 15px 40px rgba(0,0,0,.1);
-  transition:.3s;
+  transition:.4s cubic-bezier(.2,.8,.2,1);
 }
-.card:hover{transform:translateY(-10px)}
+
+.card:hover{
+  transform:translateY(-12px) scale(1.03);
+  box-shadow:0 30px 70px rgba(0,0,0,.2);
+}
+
 .card a{
   display:inline-block;
   margin-top:15px;
@@ -124,49 +188,68 @@ header p{margin:20px 0;font-size:18px}
   font-weight:700;
 }
 
-/* FADE */
-.fade-in{opacity:0;transform:translateY(40px);transition:.8s}
-.fade-in.show{opacity:1;transform:translateY(0)}
+/* ================= STATS ================= */
+.stats{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:24px;
+  margin-top:40px;
+}
 
-/* LIVE POPUP */
-.earnings-popup{
-  position:fixed;
-  bottom:25px;
-  right:25px;
-  background:linear-gradient(135deg,var(--primary),var(--primary2));
-  color:#fff;
-  padding:16px 20px;
-  border-radius:18px;
-  box-shadow:0 20px 50px rgba(0,0,0,.35);
-  display:flex;
-  align-items:center;
-  gap:12px;
-  font-size:14px;
-  font-weight:600;
-  transform:translateX(120%);
+.stat-box{
+  background:var(--card);
+  padding:30px;
+  border-radius:22px;
+  text-align:center;
+  box-shadow:0 12px 30px rgba(0,0,0,.08);
+  animation:float 4s ease-in-out infinite;
+}
+
+.stat-box h2{
+  font-size:34px;
+  color:var(--primary);
+}
+
+/* FLOAT */
+@keyframes float{
+  0%{transform:translateY(0)}
+  50%{transform:translateY(-8px)}
+  100%{transform:translateY(0)}
+}
+
+/* ================= SCROLL REVEAL ================= */
+.fade-in{
   opacity:0;
-  transition:.6s ease;
-  z-index:9999;
+  transform:translateY(40px);
+  transition:.8s ease;
 }
-.earnings-popup.show{
-  transform:translateX(0);
+
+.fade-in.show{
   opacity:1;
+  transform:translateY(0);
 }
-.earnings-popup .close{
-  cursor:pointer;
-  margin-left:10px;
+
+/* ================= FOOTER ================= */
+footer{
+  margin-top:100px;
+  padding:40px;
+  text-align:center;
+  background:#111;
+  color:#aaa;
 }
 
 @media(max-width:768px){
   nav{padding:14px 18px}
-  header{padding:80px 20px}
-  header h1{font-size:32px}
-  .earnings-popup{left:10px;right:10px}
+  header{padding:90px 20px}
+  header h1{font-size:34px}
 }
+
 </style>
 </head>
 
 <body>
+
+<div class="bg-animation"></div>
 
 <nav>
   <div class="logo">Earn Paisa Today</div>
@@ -179,132 +262,88 @@ header p{margin:20px 0;font-size:18px}
 
 <header class="fade-in">
   <h1>Earn Paisa Today</h1>
-  <p>Premium Online Earning Platform</p>
+  <p>India & International Premium Online Earning Platform</p>
   <a href="login.html" class="hero-btn">Start Earning</a>
 </header>
 
 <div class="container">
 
 <div class="stats fade-in">
-  <div class="stat-box"><h2 id="usersCount">0</h2><p>Active Users</p></div>
-  <div class="stat-box"><h2 id="payoutCount">0</h2><p>Total Payout (₹)</p></div>
-  <div class="stat-box"><h2 id="offersCount">0</h2><p>Total Offers</p></div>
+  <div class="stat-box"><h2 data-count="10000">0</h2><p>Active Users</p></div>
+  <div class="stat-box"><h2 data-count="500000">0</h2><p>Total Payout</p></div>
+  <div class="stat-box"><h2 data-count="100">0</h2><p>Offers</p></div>
 </div>
 
-<h2 class="fade-in" style="margin:70px 0 30px;font-size:28px;">Core Earning Methods</h2>
+<h2 class="section-title fade-in">Core Earning Methods</h2>
 
 <div class="grid">
-  <div class="card fade-in"><h3>Affiliate Marketing</h3><a href="#">View</a></div>
-  <div class="card fade-in"><h3>Surveys</h3><a href="#">Start</a></div>
-  <div class="card fade-in"><h3>International</h3><a href="#">Explore</a></div>
-  <div class="card fade-in"><h3>Referral</h3><a href="#">Share</a></div>
+  <div class="card fade-in"><h3>Affiliate Marketing</h3><a href="affiliate-marketing.html">View</a></div>
+  <div class="card fade-in"><h3>Surveys & Tasks</h3><a href="survey-tasks.html">Start</a></div>
+  <div class="card fade-in"><h3>International Apps</h3><a href="international-offers.html">Explore</a></div>
+  <div class="card fade-in"><h3>Referral Program</h3><a href="share.html">Share</a></div>
 </div>
 
 </div>
 
-<footer style="margin-top:100px;padding:40px;text-align:center;background:#111;color:#aaa">
-© 2026 Earn Paisa Today
+<footer>
+  © 2026 Earn Paisa Today
 </footer>
-
-<!-- LIVE POPUP -->
-<div class="earnings-popup" id="earningsPopup">
-  <div>💰</div>
-  <div id="earningsText">Loading...</div>
-  <div class="close" onclick="closePopup()">✕</div>
-</div>
-
-<audio id="cashSound">
-<source src="https://assets.mixkit.co/sfx/preview/mixkit-coin-win-notification-1992.mp3">
-</audio>
 
 <script>
 
 /* DARK MODE */
-function toggleMode(){ document.body.classList.toggle("dark"); }
+function toggleMode(){
+  document.body.classList.toggle("dark");
+}
 
-/* LOGIN SWITCH */
+/* LOGIN AUTO SWITCH */
 auth.onAuthStateChanged(user=>{
   if(user){
     loginBtn.innerText="Dashboard";
     loginBtn.href="dashboard.html";
+    if(user.email==="kashyapram21377@gmail.com"){
+      loginBtn.href="admin.html";
+    }
   }
 });
 
 /* SCROLL REVEAL */
 const observer=new IntersectionObserver(entries=>{
-  entries.forEach(e=>{
-    if(e.isIntersecting) e.target.classList.add("show");
+  entries.forEach(entry=>{
+    if(entry.isIntersecting){
+      entry.target.classList.add("show");
+    }
   });
 },{threshold:0.15});
-document.querySelectorAll(".fade-in").forEach(el=>observer.observe(el));
 
-/* REAL-TIME STATS */
-function animate(el,start,end,d=1200){
-  let s=null;
-  function step(t){
-    if(!s) s=t;
-    let p=Math.min((t-s)/d,1);
-    el.innerText=Math.floor(p*(end-start)+start).toLocaleString();
-    if(p<1) requestAnimationFrame(step);
-  }
-  requestAnimationFrame(step);
-}
-
-db.collection("users").onSnapshot(s=>animate(usersCount,0,s.size));
-
-db.collection("withdraw_requests")
-.where("status","==","approved")
-.onSnapshot(s=>{
-  let total=0;
-  s.forEach(d=> total+=Number(d.data().amount||0));
-  animate(payoutCount,0,total);
+document.querySelectorAll(".fade-in").forEach(el=>{
+  observer.observe(el);
 });
 
-db.collection("offers").onSnapshot(s=>animate(offersCount,0,s.size));
-
-/* LIVE EARNINGS */
-const popup=document.getElementById("earningsPopup");
-const popupText=document.getElementById("earningsText");
-const sound=document.getElementById("cashSound");
-
-let data=[],i=0,active=true;
-
-const demo=[
-{name:"Rahul",city:"Delhi",amount:500},
-{name:"Ankit",city:"Mumbai",amount:1200},
-{name:"Priya",city:"Bangalore",amount:850}
-];
-
-db.collection("withdraw_requests")
-.where("status","==","approved")
-.limit(10)
-.onSnapshot(s=>{
-  data=[];
-  s.forEach(d=>{
-    const x=d.data();
-    data.push({name:x.name||"User",city:x.city||"India",amount:x.amount||0});
-  });
-  if(data.length===0) data=demo;
-  show();
-});
-
-function show(){
-  if(!active||data.length===0) return;
-  const item=data[i];
-  popupText.innerHTML=`<strong>${item.name}</strong> from ${item.city} withdrew ₹${item.amount.toLocaleString()}`;
-  popup.classList.add("show");
-  sound.currentTime=0;
-  sound.play().catch(()=>{});
-  setTimeout(()=>{
-    popup.classList.remove("show");
-    i=(i+1)%data.length;
-    setTimeout(show,4000);
-  },5000);
+/* COUNTER */
+function animateCounter(el,target){
+  let count=0;
+  const speed=target/120;
+  const update=()=>{
+    count+=speed;
+    if(count<target){
+      el.innerText=Math.floor(count);
+      requestAnimationFrame(update);
+    }else{
+      el.innerText=target.toLocaleString()+"+";
+    }
+  };
+  update();
 }
 
-function closePopup(){
-  active=false;
-  popup.style.display="none";
+document.querySelectorAll("[data-count]").forEach(el=>{
+  animateCounter(el,parseInt(el.dataset.count));
+});
+
+/* REF TRACKING */
+const ref=new URLSearchParams(window.location.search).get("ref");
+if(ref){
+  localStorage.setItem("referrer",ref);
 }
 
 </script>
