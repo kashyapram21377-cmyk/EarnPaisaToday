@@ -1,318 +1,109 @@
-<!DOCTYPE html>            <html lang="en">            
-<head>            
-<meta charset="UTF-8">            
-<title>Earn Paisa Today – Premium Online Earning Platform</title>            
-<meta name="viewport" content="width=device-width, initial-scale=1.0">            
-<meta name="description" content="Earn Paisa Today is a premium earning platform for affiliate marketing, surveys, international apps & referral income.">            <!-- Firebase -->            <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>            <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>            <script>            
-firebase.initializeApp({            
-  apiKey:"AIzaSyBwd7y4uG955kZ5eg91ryn8bzbWzK2R_Ks",            
-  authDomain:"earnpaisatoday.firebaseapp.com",            
-  projectId:"earnpaisatoday"            
-});            
-const auth = firebase.auth();            
-</script>            <style>            
-            
-/* ================= ROOT ================= */            
-:root{            
-  --primary:#ff5722;            
-  --primary2:#ff9800;            
-  --bg:#f4f6f8;            
-  --card:#ffffff;            
-  --text:#222;            
-}            
-            
-body.dark{            
-  --bg:#0f1115;            
-  --card:#1c1f26;            
-  --text:#ffffff;            
-}            
-            
-*{margin:0;padding:0;box-sizing:border-box}            
-            
-body{            
-  font-family:Segoe UI,Arial;            
-  background:var(--bg);            
-  color:var(--text);            
-  transition:.4s ease;            
-  overflow-x:hidden;            
-}            
-            
-/* ================= ANIMATED BACKGROUND ================= */            
-.bg-animation{            
-  position:fixed;            
-  width:100%;            
-  height:100%;            
-  background:linear-gradient(-45deg,#ff5722,#ff9800,#ff7043,#ffa726);            
-  background-size:400% 400%;            
-  animation:gradient 12s ease infinite;            
-  z-index:-1;            
-  opacity:.08;            
-}            
-            
-@keyframes gradient{            
-  0%{background-position:0% 50%}            
-  50%{background-position:100% 50%}            
-  100%{background-position:0% 50%}            
-}            
-            
-/* ================= NAVBAR ================= */            
-nav{            
-  position:sticky;            
-  top:0;            
-  backdrop-filter:blur(14px);            
-  background:rgba(0,0,0,.75);            
-  padding:18px 40px;            
-  display:flex;            
-  justify-content:space-between;            
-  align-items:center;            
-  z-index:999;            
-}            
-            
-nav .logo{            
-  font-weight:900;            
-  font-size:20px;            
-  color:#fff;            
-}            
-            
-nav a{            
-  color:#fff;            
-  text-decoration:none;            
-  margin-left:20px;            
-  font-weight:600;            
-  font-size:14px;            
-  transition:.3s;            
-}            
-            
-nav a:hover{            
-  color:var(--primary);            
-}            
-            
-.toggle-btn{            
-  background:#fff;            
-  border:none;            
-  padding:8px 14px;            
-  border-radius:20px;            
-  cursor:pointer;            
-  font-weight:700;            
-  margin-left:15px;            
-}            
-            
-/* ================= HERO ================= */            
-header{            
-  padding:120px 20px;            
-  text-align:center;            
-  color:#fff;            
-}            
-            
-header h1{            
-  font-size:48px;            
-  font-weight:900;            
-}            
-            
-header p{            
-  margin:20px 0;            
-  font-size:18px;            
-}            
-            
-.hero-btn{            
-  display:inline-block;            
-  padding:14px 32px;            
-  border-radius:30px;            
-  background:#fff;            
-  color:#ff5722;            
-  font-weight:800;            
-  text-decoration:none;            
-  margin:8px;            
-  transition:.3s;            
-}            
-            
-.hero-btn:hover{            
-  transform:translateY(-6px);            
-  box-shadow:0 20px 40px rgba(0,0,0,.3);            
-}            
-            
-/* ================= CONTAINER ================= */            
-.container{            
-  max-width:1200px;            
-  margin:80px auto;            
-  padding:0 20px;            
-}            
-            
-/* ================= SECTION ================= */            
-.section-title{            
-  font-size:28px;            
-  font-weight:900;            
-  margin:70px 0 30px;            
-  border-left:6px solid var(--primary);            
-  padding-left:16px;            
-}            
-            
-/* ================= GRID ================= */            
-.grid{            
-  display:grid;            
-  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));            
-  gap:30px;            
-}            
-            
-/* ================= CARD ================= */            
-.card{            
-  background:var(--card);            
-  padding:30px;            
-  border-radius:22px;            
-  box-shadow:0 15px 40px rgba(0,0,0,.1);            
-  transition:.4s cubic-bezier(.2,.8,.2,1);            
-}            
-            
-.card:hover{            
-  transform:translateY(-12px) scale(1.03);            
-  box-shadow:0 30px 70px rgba(0,0,0,.2);            
-}            
-            
-.card a{            
-  display:inline-block;            
-  margin-top:15px;            
-  padding:12px 24px;            
-  border-radius:25px;            
-  background:linear-gradient(135deg,var(--primary),var(--primary2));            
-  color:#fff;            
-  text-decoration:none;            
-  font-weight:700;            
-}            
-            
-/* ================= STATS ================= */            
-.stats{            
-  display:grid;            
-  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));            
-  gap:24px;            
-  margin-top:40px;            
-}            
-            
-.stat-box{            
-  background:var(--card);            
-  padding:30px;            
-  border-radius:22px;            
-  text-align:center;            
-  box-shadow:0 12px 30px rgba(0,0,0,.08);            
-  animation:float 4s ease-in-out infinite;            
-}            
-            
-.stat-box h2{            
-  font-size:34px;            
-  color:var(--primary);            
-}            
-            
-/* FLOAT */            
-@keyframes float{            
-  0%{transform:translateY(0)}            
-  50%{transform:translateY(-8px)}            
-  100%{transform:translateY(0)}            
-}            
-            
-/* ================= SCROLL REVEAL ================= */            
-.fade-in{            
-  opacity:0;            
-  transform:translateY(40px);            
-  transition:.8s ease;            
-}            
-            
-.fade-in.show{            
-  opacity:1;            
-  transform:translateY(0);            
-}            
-            
-/* ================= FOOTER ================= */            
-footer{            
-  margin-top:100px;            
-  padding:40px;            
-  text-align:center;            
-  background:#111;            
-  color:#aaa;            
-}            
-            
-@media(max-width:768px){            
-  nav{padding:14px 18px}            
-  header{padding:90px 20px}            
-  header h1{font-size:34px}            
-}            
-            
-</style>            </head>            <body>            <div class="bg-animation"></div>            <nav>            
-  <div class="logo">Earn Paisa Today</div>            
-  <div>            
-    <a href="index.html">Home</a>            
-    <a href="login.html" id="loginBtn">Login</a>            
-    <button class="toggle-btn" onclick="toggleMode()">🌙</button>            
-  </div>            
-</nav>            <header class="fade-in">            
-  <h1>Earn Paisa Today</h1>            
-  <p>India & International Premium Online Earning Platform</p>            
-  <a href="login.html" class="hero-btn">Start Earning</a>            
-</header>            <div class="container">            <div class="stats fade-in">            
-  <div class="stat-box"><h2 data-count="10000">0</h2><p>Active Users</p></div>            
-  <div class="stat-box"><h2 data-count="500000">0</h2><p>Total Payout</p></div>            
-  <div class="stat-box"><h2 data-count="100">0</h2><p>Offers</p></div>            
-</div>            <h2 class="section-title fade-in">Core Earning Methods</h2>            <div class="grid">            
-  <div class="card fade-in"><h3>Affiliate Marketing</h3><a href="affiliate-marketing.html">View</a></div>            
-  <div class="card fade-in"><h3>Surveys & Tasks</h3><a href="survey-tasks.html">Start</a></div>            
-  <div class="card fade-in"><h3>International Apps</h3><a href="international-offers.html">Explore</a></div>            
-  <div class="card fade-in"><h3>Referral Program</h3><a href="share.html">Share</a></div>            
-</div>            </div>            <footer>            
-  © 2026 Earn Paisa Today            
-</footer>            <script>            
-            
-/* DARK MODE */            
-function toggleMode(){            
-  document.body.classList.toggle("dark");            
-}            
-            
-/* LOGIN AUTO SWITCH */            
-auth.onAuthStateChanged(user=>{            
-  if(user){            
-    loginBtn.innerText="Dashboard";            
-    loginBtn.href="dashboard.html";            
-    if(user.email==="kashyapram21377@gmail.com"){            
-      loginBtn.href="admin.html";            
-    }            
-  }            
-});            
-            
-/* SCROLL REVEAL */            
-const observer=new IntersectionObserver(entries=>{            
-  entries.forEach(entry=>{            
-    if(entry.isIntersecting){            
-      entry.target.classList.add("show");            
-    }            
-  });            
-},{threshold:0.15});            
-            
-document.querySelectorAll(".fade-in").forEach(el=>{            
-  observer.observe(el);            
-});            
-            
-/* COUNTER */            
-function animateCounter(el,target){            
-  let count=0;            
-  const speed=target/120;            
-  const update=()=>{            
-    count+=speed;            
-    if(count<target){            
-      el.innerText=Math.floor(count);            
-      requestAnimationFrame(update);            
-    }else{            
-      el.innerText=target.toLocaleString()+"+";            
-    }            
-  };            
-  update();            
-}            
-            
-document.querySelectorAll("[data-count]").forEach(el=>{            
-  animateCounter(el,parseInt(el.dataset.count));            
-});            
-            
-/* REF TRACKING */            
-const ref=new URLSearchParams(window.location.search).get("ref");            
-if(ref){            
-  localStorage.setItem("referrer",ref);            
-}            
-            
-</script>            </body>            
-</html>            
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Earn Paisa Today – Premium Online Earning Platform</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- Firebase -->
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+
+<script>
+firebase.initializeApp({
+  apiKey:"AIzaSyBwd7y4uG955kZ5eg91ryn8bzbWzK2R_Ks",
+  authDomain:"earnpaisatoday.firebaseapp.com",
+  projectId:"earnpaisatoday"
+});
+const auth = firebase.auth();
+const db = firebase.firestore();
+</script>
+
+<style>
+body{margin:0;font-family:Segoe UI,Arial;background:#f4f6f8}
+nav{
+  background:#111;
+  padding:18px 30px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+nav .logo{color:#fff;font-weight:900}
+nav a{
+  color:#fff;
+  text-decoration:none;
+  margin-left:20px;
+  font-weight:600;
+}
+header{
+  padding:120px 20px;
+  text-align:center;
+  background:linear-gradient(135deg,#ff5722,#ff9800);
+  color:#fff;
+}
+button{
+  padding:8px 16px;
+  border:none;
+  border-radius:20px;
+  cursor:pointer;
+  font-weight:600;
+}
+</style>
+</head>
+
+<body>
+
+<nav>
+  <div class="logo">Earn Paisa Today</div>
+  <div>
+    <a href="index.html">Home</a>
+    <a href="login.html" id="loginBtn">Login</a>
+  </div>
+</nav>
+
+<header>
+  <h1>Earn Paisa Today</h1>
+  <p>India & International Premium Online Earning Platform</p>
+</header>
+
+<script>
+
+/* ===== ROLE BASED NAVIGATION ===== */
+auth.onAuthStateChanged(async user=>{
+  const loginBtn = document.getElementById("loginBtn");
+
+  if(!user){
+    loginBtn.innerText="Login";
+    loginBtn.href="login.html";
+    return;
+  }
+
+  const doc = await db.collection("users").doc(user.uid).get();
+
+  if(!doc.exists){
+    loginBtn.innerText="Dashboard";
+    loginBtn.href="dashboard.html";
+    return;
+  }
+
+  const role = doc.data().role;
+
+  if(role === "superadmin"){
+    loginBtn.innerText="Super Admin";
+    loginBtn.href="superadmin.html";
+  }
+  else if(role === "admin"){
+    loginBtn.innerText="Admin Panel";
+    loginBtn.href="admin.html";
+  }
+  else{
+    loginBtn.innerText="Dashboard";
+    loginBtn.href="dashboard.html";
+  }
+});
+
+</script>
+
+</body>
+</html>
