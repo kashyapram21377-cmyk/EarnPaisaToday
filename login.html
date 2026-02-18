@@ -4,252 +4,104 @@
 <meta charset="UTF-8">
 <title>Login | Earn Paisa Today</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Secure login to Earn Paisa Today dashboard">
 
-<!-- Firebase -->
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
-
-<style>
-*{box-sizing:border-box}
-body{
-  margin:0;
-  min-height:100vh;
-  font-family:Segoe UI,Arial;
-  background:linear-gradient(135deg,#ff5722,#ff9800);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-}
-
-.card{
-  width:100%;
-  max-width:420px;
-  background:rgba(255,255,255,.95);
-  backdrop-filter:blur(12px);
-  border-radius:24px;
-  padding:35px 30px;
-  box-shadow:0 25px 60px rgba(0,0,0,.25);
-  text-align:center;
-  animation:fade .6s ease;
-}
-
-@keyframes fade{
-  from{opacity:0;transform:translateY(20px)}
-  to{opacity:1;transform:translateY(0)}
-}
-
-.card h1{
-  margin:0;
-  color:#ff5722;
-  font-size:24px;
-}
-
-.card p{
-  font-size:14px;
-  color:#666;
-  margin-bottom:20px;
-}
-
-.input-group{
-  position:relative;
-}
-
-.input{
-  width:100%;
-  padding:14px;
-  margin:10px 0;
-  border-radius:14px;
-  border:1px solid #ddd;
-  font-size:14px;
-  transition:.3s;
-}
-
-.input:focus{
-  border-color:#ff5722;
-  outline:none;
-  box-shadow:0 0 0 3px rgba(255,87,34,.15);
-}
-
-.toggle{
-  position:absolute;
-  right:15px;
-  top:50%;
-  transform:translateY(-50%);
-  font-size:13px;
-  cursor:pointer;
-  color:#777;
-}
-
-.btn{
-  width:100%;
-  padding:14px;
-  margin-top:15px;
-  border:none;
-  border-radius:16px;
-  font-weight:700;
-  cursor:pointer;
-  font-size:14px;
-  transition:.3s;
-}
-
-.primary{
-  background:#ff5722;
-  color:#fff;
-}
-
-.primary:hover{
-  background:#e64a19;
-}
-
-.google{
-  background:#fff;
-  border:1px solid #ddd;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  gap:10px;
-}
-
-.google img{width:18px}
-
-.link{
-  margin-top:12px;
-  font-size:13px;
-  color:#ff5722;
-  cursor:pointer;
-}
-
-.msg{
-  margin-top:14px;
-  font-size:13px;
-}
-
-.ok{color:green}
-.err{color:#d32f2f}
-
-.loading{
-  opacity:.6;
-  pointer-events:none;
-}
-</style>
 </head>
 
 <body>
 
-<div class="card">
-  <h1>Earn Paisa Today</h1>
-  <p>Secure Dashboard Login</p>
+<h2>Earn Paisa Today Login</h2>
 
-  <div class="input-group">
-    <input id="email" class="input" type="email" placeholder="Email" required>
-  </div>
+<input id="email" type="email" placeholder="Email"><br><br>
+<input id="password" type="password" placeholder="Password"><br><br>
 
-  <div class="input-group">
-    <input id="password" class="input" type="password" placeholder="Password" required>
-    <span class="toggle" onclick="togglePassword()">Show</span>
-  </div>
+<button onclick="login()">Login</button>
+<button onclick="signup()">Signup</button>
+<button onclick="googleLogin()">Google Login</button>
+<button onclick="resetPassword()">Reset Password</button>
 
-  <button id="loginBtn" class="btn primary" onclick="login()">Login</button>
-
-  <div class="link" onclick="resetPassword()">Forgot password?</div>
-
-  <hr style="margin:22px 0">
-
-  <button class="btn google" onclick="googleLogin()">
-    <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg">
-    Continue with Google
-  </button>
-
-  <div class="link" onclick="signup()">Create new account</div>
-
-  <div id="msg" class="msg"></div>
-</div>
+<p id="msg"></p>
 
 <script>
-/* 🔥 Firebase Config */
+/* Firebase Config */
 firebase.initializeApp({
-  apiKey: "AIzaSyBwd7y4uG955kZ5eg91ryn8bzbWzK2R_Ks",
+  apiKey: "YOUR_API_KEY",
   authDomain: "earnpaisatoday.firebaseapp.com",
   projectId: "earnpaisatoday"
 });
 
 const auth = firebase.auth();
 const msg = document.getElementById("msg");
-const loginBtn = document.getElementById("loginBtn");
+const email = document.getElementById("email");
+const password = document.getElementById("password");
 
-/* 🔁 Auto Redirect */
+/* Auto Redirect */
 auth.onAuthStateChanged(user=>{
   if(user){
     if(user.email === "kashyapram21377@gmail.com"){
-      window.location.replace("admin.html");
+      window.location.href = "admin.html";
     }else{
-      window.location.replace("dashboard.html");
+      window.location.href = "dashboard.html";
     }
   }
 });
 
-/* 🔐 LOGIN */
+/* Login */
 function login(){
   if(!email.value || !password.value){
-    msg.innerHTML="<span class='err'>Fill all fields</span>";
+    msg.innerText = "Fill all fields";
     return;
   }
 
-  loginBtn.innerText="Logging in...";
-  loginBtn.classList.add("loading");
-
-  auth.signInWithEmailAndPassword(email.value,password.value)
-  .catch(()=>{
-    msg.innerHTML="<span class='err'>Invalid email or password</span>";
-    loginBtn.innerText="Login";
-    loginBtn.classList.remove("loading");
+  auth.signInWithEmailAndPassword(email.value, password.value)
+  .then(()=>{
+    msg.innerText = "Login successful";
+  })
+  .catch(error=>{
+    msg.innerText = error.message;
   });
 }
 
-/* 🆕 SIGNUP */
+/* Signup */
 function signup(){
   if(password.value.length < 6){
-    msg.innerHTML="<span class='err'>Password must be 6+ characters</span>";
+    msg.innerText = "Password must be 6+ characters";
     return;
   }
 
-  auth.createUserWithEmailAndPassword(email.value,password.value)
-  .catch(e=>{
-    msg.innerHTML="<span class='err'>"+e.message+"</span>";
+  auth.createUserWithEmailAndPassword(email.value, password.value)
+  .then(()=>{
+    msg.innerText = "Account created successfully";
+  })
+  .catch(error=>{
+    msg.innerText = error.message;
   });
 }
 
-/* 🔑 Google Login */
+/* Google Login */
 function googleLogin(){
   const provider = new firebase.auth.GoogleAuthProvider();
-  auth.signInWithRedirect(provider);
+  auth.signInWithPopup(provider)
+  .catch(error=>{
+    msg.innerText = error.message;
+  });
 }
 
-auth.getRedirectResult().catch(e=>{
-  msg.innerHTML="<span class='err'>"+e.message+"</span>";
-});
-
-/* 🔁 Reset Password */
+/* Reset Password */
 function resetPassword(){
   if(!email.value){
-    msg.innerHTML="<span class='err'>Enter email first</span>";
+    msg.innerText = "Enter email first";
     return;
   }
 
   auth.sendPasswordResetEmail(email.value)
   .then(()=>{
-    msg.innerHTML="<span class='ok'>Reset email sent</span>";
+    msg.innerText = "Reset email sent";
+  })
+  .catch(error=>{
+    msg.innerText = error.message;
   });
-}
-
-/* 👁 Toggle Password */
-function togglePassword(){
-  if(password.type==="password"){
-    password.type="text";
-  }else{
-    password.type="password";
-  }
 }
 </script>
 
