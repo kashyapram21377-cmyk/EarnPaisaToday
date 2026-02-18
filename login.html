@@ -5,104 +5,246 @@
 <title>Login | Earn Paisa Today</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+<style>
+*{box-sizing:border-box}
+body{
+  margin:0;
+  min-height:100vh;
+  font-family:Segoe UI,Arial;
+  background:linear-gradient(135deg,#ff5722,#ff9800);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.card{
+  width:100%;
+  max-width:420px;
+  background:#fff;
+  border-radius:20px;
+  padding:35px;
+  box-shadow:0 25px 60px rgba(0,0,0,.2);
+  text-align:center;
+  animation:fade .5s ease;
+}
+
+@keyframes fade{
+  from{opacity:0;transform:translateY(20px)}
+  to{opacity:1;transform:translateY(0)}
+}
+
+h1{margin:0;color:#ff5722}
+p{color:#666;font-size:14px}
+
+.input{
+  width:100%;
+  padding:14px;
+  margin:12px 0;
+  border-radius:12px;
+  border:1px solid #ddd;
+  font-size:14px;
+}
+
+.input:focus{
+  border-color:#ff5722;
+  outline:none;
+  box-shadow:0 0 0 3px rgba(255,87,34,.15);
+}
+
+.btn{
+  width:100%;
+  padding:14px;
+  border:none;
+  border-radius:14px;
+  background:#ff5722;
+  color:#fff;
+  font-weight:bold;
+  cursor:pointer;
+  margin-top:10px;
+}
+
+.btn:disabled{
+  opacity:.6;
+  cursor:not-allowed;
+}
+
+.link{
+  margin-top:12px;
+  font-size:13px;
+  color:#ff5722;
+  cursor:pointer;
+}
+
+.toast{
+  margin-top:15px;
+  font-size:13px;
+}
+
+.success{color:green}
+.error{color:#d32f2f}
+
+.spinner{
+  border:3px solid #f3f3f3;
+  border-top:3px solid #fff;
+  border-radius:50%;
+  width:18px;
+  height:18px;
+  animation:spin 1s linear infinite;
+  display:inline-block;
+}
+
+@keyframes spin{
+  100%{transform:rotate(360deg)}
+}
+</style>
 </head>
 
 <body>
 
-<h2>Earn Paisa Today Login</h2>
+<div class="card">
+  <h1>Earn Paisa Today</h1>
+  <p>Secure Dashboard Login</p>
 
-<input id="email" type="email" placeholder="Email"><br><br>
-<input id="password" type="password" placeholder="Password"><br><br>
+  <input id="email" class="input" type="email" placeholder="Email">
+  <input id="password" class="input" type="password" placeholder="Password">
 
-<button onclick="login()">Login</button>
-<button onclick="signup()">Signup</button>
-<button onclick="googleLogin()">Google Login</button>
-<button onclick="resetPassword()">Reset Password</button>
+  <button id="loginBtn" class="btn">Login</button>
 
-<p id="msg"></p>
+  <div class="link" id="reset">Forgot password?</div>
+  <div class="link" id="signup">Create new account</div>
 
-<script>
-/* Firebase Config */
-firebase.initializeApp({
+  <div id="toast" class="toast"></div>
+</div>
+
+<script type="module">
+
+import { initializeApp } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js";
+import {
+  getAuth,
+  signInWithEmailAndPassword,
+  createUserWithEmailAndPassword,
+  sendPasswordResetEmail,
+  sendEmailVerification,
+  onAuthStateChanged,
+  signOut
+} from "https://www.gstatic.com/firebasejs/9.23.0/firebase-auth.js";
+
+import {
+  getFirestore,
+  doc,
+  setDoc,
+  getDoc
+} from "https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore.js";
+
+const firebaseConfig = {
   apiKey: "YOUR_API_KEY",
   authDomain: "earnpaisatoday.firebaseapp.com",
   projectId: "earnpaisatoday"
-});
+};
 
-const auth = firebase.auth();
-const msg = document.getElementById("msg");
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getFirestore(app);
+
 const email = document.getElementById("email");
 const password = document.getElementById("password");
+const loginBtn = document.getElementById("loginBtn");
+const toast = document.getElementById("toast");
 
-/* Auto Redirect */
-auth.onAuthStateChanged(user=>{
+function showToast(message,type="error"){
+  toast.innerHTML = `<span class="${type}">${message}</span>`;
+}
+
+function setLoading(state){
+  loginBtn.disabled = state;
+  loginBtn.innerHTML = state ? '<div class="spinner"></div>' : 'Login';
+}
+
+loginBtn.onclick = async ()=>{
+  if(!email.value || !password.value){
+    showToast("Fill all fields");
+    return;
+  }
+
+  try{
+    setLoading(true);
+    const userCredential = await signInWithEmailAndPassword(auth,email.value,password.value);
+
+    if(!userCredential.user.emailVerified){
+      showToast("Please verify your email first");
+      await signOut(auth);
+      setLoading(false);
+      return;
+    }
+
+    const docSnap = await getDoc(doc(db,"users",userCredential.user.uid));
+
+    if(docSnap.exists()){
+      const role = docSnap.data().role;
+
+      if(role === "admin"){
+        window.location.href = "admin.html";
+      }else{
+        window.location.href = "dashboard.html";
+      }
+    }
+
+  }catch(error){
+    showToast(error.message);
+    setLoading(false);
+  }
+};
+
+document.getElementById("signup").onclick = async ()=>{
+  if(password.value.length < 6){
+    showToast("Password must be at least 6 characters");
+    return;
+  }
+
+  try{
+    const userCredential = await createUserWithEmailAndPassword(auth,email.value,password.value);
+
+    await setDoc(doc(db,"users",userCredential.user.uid),{
+      email: email.value,
+      role: "user",
+      createdAt: new Date()
+    });
+
+    await sendEmailVerification(userCredential.user);
+    showToast("Verification email sent","success");
+
+  }catch(error){
+    showToast(error.message);
+  }
+};
+
+document.getElementById("reset").onclick = async ()=>{
+  if(!email.value){
+    showToast("Enter email first");
+    return;
+  }
+
+  try{
+    await sendPasswordResetEmail(auth,email.value);
+    showToast("Reset email sent","success");
+  }catch(error){
+    showToast(error.message);
+  }
+};
+
+onAuthStateChanged(auth, async (user)=>{
   if(user){
-    if(user.email === "kashyapram21377@gmail.com"){
-      window.location.href = "admin.html";
-    }else{
-      window.location.href = "dashboard.html";
+    const docSnap = await getDoc(doc(db,"users",user.uid));
+    if(docSnap.exists()){
+      if(docSnap.data().role === "admin"){
+        window.location.href="admin.html";
+      }else{
+        window.location.href="dashboard.html";
+      }
     }
   }
 });
 
-/* Login */
-function login(){
-  if(!email.value || !password.value){
-    msg.innerText = "Fill all fields";
-    return;
-  }
-
-  auth.signInWithEmailAndPassword(email.value, password.value)
-  .then(()=>{
-    msg.innerText = "Login successful";
-  })
-  .catch(error=>{
-    msg.innerText = error.message;
-  });
-}
-
-/* Signup */
-function signup(){
-  if(password.value.length < 6){
-    msg.innerText = "Password must be 6+ characters";
-    return;
-  }
-
-  auth.createUserWithEmailAndPassword(email.value, password.value)
-  .then(()=>{
-    msg.innerText = "Account created successfully";
-  })
-  .catch(error=>{
-    msg.innerText = error.message;
-  });
-}
-
-/* Google Login */
-function googleLogin(){
-  const provider = new firebase.auth.GoogleAuthProvider();
-  auth.signInWithPopup(provider)
-  .catch(error=>{
-    msg.innerText = error.message;
-  });
-}
-
-/* Reset Password */
-function resetPassword(){
-  if(!email.value){
-    msg.innerText = "Enter email first";
-    return;
-  }
-
-  auth.sendPasswordResetEmail(email.value)
-  .then(()=>{
-    msg.innerText = "Reset email sent";
-  })
-  .catch(error=>{
-    msg.innerText = error.message;
-  });
-}
 </script>
 
 </body>
