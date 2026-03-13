@@ -1,29 +1,14 @@
-{
+echo '{
   "hosting": {
     "public": "public",
     "ignore": [
       "firebase.json",
       "**/.*",
       "**/node_modules/**"
-    ],
-    "rewrites": [
-      {
-        "source": "**",
-        "destination": "/index.html"
-      }
     ]
-  },
-  "database": {
-    "rules": "database.rules.json"
-  },
-  "auth": {
-    "providers": {
-      "anonymous": true,
-      "emailPassword": true,
-      "googleSignIn": {
-        "oAuthBrandDisplayName": "EarnPaisaToday",
-        "supportEmail": "support@undefined.firebaseapp.com"
-      }
-    }
   }
-}
+}' > firebase.json
+
+git add firebase.json
+git commit -m "Add firebase.json"
+git push origin main
